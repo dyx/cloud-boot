@@ -1,0 +1,69 @@
+server:
+  port: 10000
+spring:
+  application:
+    name: service-user
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+      eager: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/user?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&allowMultiQueries=true&nullCatalogMeansCurrent=true
+  config:
+    import:
+      - nacos:${spring.application.name}-dev.yml
+
+feign:
+  sentinel:
+    enabled: true
+
+seata:
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group : "SEATA_GROUP"
+      namespace: ""
+      username: nacos
+      password: nacos
+      context-path: ""
+      ##if use MSE Nacos with auth, mutex with username/password attribute
+      #access-key: ""
+      #secret-key: ""
+  tx-service-group: default_tx_group
+  service:
+    vgroup-mapping:
+      default_tx_group: default
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+      where-strategy: not_empty
+      insert-strategy: not_empty
+      update-strategy: not_null
+  configuration:
+    jdbc-type-for-null: 'null' # 是否设置字段为null
+    call-setters-on-nulls: true # 是否调用set方法时传入null值
+    shrink-whitespaces-in-sql: true # 去掉sql中多余的空格
+
+knife4j:
+  enable: true
+
+custom:
+  logfile:
+    path: .logs/${spring.application.name}
+
