@@ -67,11 +67,6 @@ services:
 3. 启用登录功能，修改配置`env/nacos-standalone-mysql.env`下的属性`NACOS_AUTH_ENABLE=true`（如没有则增加）
 4. cd 进入 nacos-docker 项目目录，执行命令`docker-compose -f example/standalone-mysql-8.yaml up -d`
 5. 访问 http://localhost:8848/nacos/ 初始化管理员用户名密码：nacos/nacos（如修改为其他，需要修改本项目的 application.yml 以及 Seata 的配置文件）
-6. 创建自定义网络，并连接Nacos，为后续的docker容器关联Nacos做准备
-```bash
-docker network create cloud-boot-network
-docker network connect cloud-boot-network nacos-standalone-mysql
-```
 #### Seata
 1. 复制配置文件
 ```basah
@@ -88,7 +83,7 @@ seata:
     type: nacos
     nacos:
       application: seata-server
-      server-addr: nacos-standalone-mysql:8848
+      server-addr: 127.0.0.1:8848
       group: SEATA_GROUP
       namespace:
       cluster: default
@@ -106,12 +101,9 @@ services:
     image: apache/seata-server:2.2.0
     hostname: seata-server
     container_name: seata-server
-    ports:
-      - 8091:8091
-      - 7091:7091
-    networks:
-      - cloud-boot-network
+    network_mode: host
     environment:
+      - SEATA_IP=[改成自己的宿主机IP]
       - SEATA_PORT=8091
     volumes:
       - ~/develop/docker/docker-data/seata-server/resources:/seata-server/resources
@@ -120,10 +112,6 @@ services:
       - 8091
       - 7091
     restart: always
-
-networks:
-  cloud-boot-network:
-    external: true
 ```
 访问 http://localhost:7091 默认用户名密码：`seata/seata`
 #### Sentinel
