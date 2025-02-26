@@ -36,7 +36,7 @@
 ### 一、环境准备
 建议本地新建两个文件夹，一个放置Docker相关，一个放置jar包相关
 #### Java17
-本地需要安装Java环境，用于运行Sentinel
+本地需要安装Java环境，用于运行Sentinel和Seata
 #### MySQL8.0
 ```yaml
 services:
@@ -67,58 +67,14 @@ services:
 3. 启用登录功能，修改配置`env/nacos-standalone-mysql.env`下的属性`NACOS_AUTH_ENABLE=true`（如没有则增加）
 4. cd 进入 nacos-docker 项目目录，执行命令`docker-compose -f example/standalone-mysql-8.yaml up -d`
 5. 访问 http://localhost:8848/nacos/ 初始化管理员用户名密码：nacos/nacos（如修改为其他，需要修改本项目的 application.yml 以及 Seata 的配置文件）
-#### Seata
-1. 复制配置文件
-```basah
-docker run -d -p 8091:8091 -p 7091:7091  --name seata-server apache/seata-server:2.2.0
-mkdir -p ~/develop/docker/docker-data/seata-server
-docker cp seata-server:/seata-server/resources ~/develop/docker/docker-data/seata-server
-docker stop seata-server
-docker rm seata-server
-```
-2. 修改配置 resources/application.yml，将Seata注册到Nacos
-```yaml
-seata:
-  registry:
-    type: nacos
-    nacos:
-      application: seata-server
-      server-addr: 127.0.0.1:8848
-      group: SEATA_GROUP
-      namespace:
-      cluster: default
-      username: nacos
-      password: nacos
-      ##if use MSE Nacos with auth, mutex with username/password attribute
-      #access-key: ""
-      #secret-key: ""
-```
-3. 使用下面 Yaml 文件，部署 seata-server `docker compose up -d`
-```yaml
-version: "3"
-services:
-  seata-server:
-    image: apache/seata-server:2.2.0
-    hostname: seata-server
-    container_name: seata-server
-    network_mode: host
-    environment:
-      - SEATA_IP=[改成自己的宿主机IP]
-      - SEATA_PORT=8091
-    volumes:
-      - ~/develop/docker/docker-data/seata-server/resources:/seata-server/resources
-      - ~/develop/docker/docker-data/seata-server/sessionStore:/seata-server/sessionStore
-    expose:
-      - 8091
-      - 7091
-    restart: always
-```
-访问 http://localhost:7091 默认用户名密码：`seata/seata`
 #### Sentinel
 1. 下载jar包，地址 https://github.com/alibaba/Sentinel/releases
-2. 命令窗口运行：`java -jar sentinel-dashboard-x.x.x.jar`（版本更换为自己下载的版本）
+2. 命令窗口运行：`java -jar sentinet-dashboard-x.x.x.jar`（版本更换为自己下载的版本）
 3. 访问 http://localhost:8080 默认用户名密码：`sentinel/sentinel`
-- 这里没有使用Docker部署，因为Docker远程仓库没有官方的sentinel-dashboard镜像，如果想要使用Docker部署，建议下载jar包配合本地Dockerfile进行部署
+#### Seata
+1. 下载Binary包，地址 https://seata.apache.org/download/seata-server
+2. 解压后，进入seata-server/bin目录，执行命令：`sh seata-server.sh`
+3. 访问 http://localhost:7091 默认用户名密码：`seata/seata`
 ### 二、启动项目
 1. 克隆代码
 ```
