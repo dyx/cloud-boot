@@ -72,9 +72,25 @@ services:
 2. 命令窗口运行：`java -jar sentinet-dashboard-x.x.x.jar`（版本更换为自己下载的版本）
 3. 访问 http://localhost:8080 默认用户名密码：`sentinel/sentinel`
 #### Seata
-1. 下载Binary包，地址 https://seata.apache.org/download/seata-server
-2. 解压后，进入seata-server/bin目录，执行命令：`sh seata-server.sh`
-3. 访问 http://localhost:7091 默认用户名密码：`seata/seata`
+1. 下载Binary包并解压，地址 https://seata.apache.org/download/seata-server
+2. 进入seata-server/conf目录，修改application.yml文件，使用Nacos作为注册中心
+```yaml
+registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      namespace:
+      cluster: default
+      username: nacos
+      password: nacos
+      ##if use MSE Nacos with auth, mutex with username/password attribute
+      #access-key: ""
+      #secret-key: ""
+```
+3. 进入seata-server/bin目录，执行命令：`sh seata-server.sh`
+4. 访问 http://localhost:7091 默认用户名密码：`seata/seata`
 ### 二、启动项目
 1. 克隆代码
 ```
