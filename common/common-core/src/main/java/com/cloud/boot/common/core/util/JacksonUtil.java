@@ -12,8 +12,7 @@ public class JacksonUtil {
 
     private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     static {
-        OBJECT_MAPPER.setDateFormat(new SimpleDateFormat(CommonConstant.NORMAL_DATETIME_FORMATTER));
-        OBJECT_MAPPER.registerModule(new LocalDateTimeModule());
+        configObjectMapper(OBJECT_MAPPER);
     }
 
     public static String toJsonStr(Object obj) {
@@ -24,5 +23,12 @@ public class JacksonUtil {
         }
 
         return "";
+    }
+
+    public static void configObjectMapper(ObjectMapper objectMapper) {
+        if (objectMapper != null) {
+            objectMapper.setDateFormat(new SimpleDateFormat(CommonConstant.NORMAL_DATETIME_FORMATTER));
+            objectMapper.registerModule(new LocalDateTimeModule());
+        }
     }
 }

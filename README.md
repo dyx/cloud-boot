@@ -61,6 +61,27 @@ services:
 1. 使用上面的Yaml文件，部署 MySQL `docker compose up -d`
 2. 创建三个数据库：`order`、`product`、`user`
 3. 将`db`目录下的 SQL 在对应的数据库中执行
+#### Redis7
+1. 创建文件夹`~/develop/docker/docker-data/redis/conf`，下载官方配置文件，移动到该文件夹中
+   - 官网配置文件地址 https://download.redis.io/redis-stable/redis.conf
+2. 使用下面的Yaml文件，部署 Redis `docker compose up -d`
+```yaml
+version: '3'
+services:
+  mysql:
+    image: redis:7
+    container_name: redis7
+    ports:
+      - 6379:6379
+    volumes:
+      - ~/develop/docker/docker-data/redis/conf:/usr/local/etc/redis
+      - ~/develop/docker/docker-data/redis/data:/data
+    environment:
+      - ALLOW_EMPTY_PASSWORD=false
+      # 如修改为其他，需要修改本项目的 application.yml
+      - REDIS_PASSWORD=123456
+    restart: always
+```
 #### Nacos
 1. 下载 nacos-docker 项目到本地，地址 https://github.com/nacos-group/nacos-docker.git
 2. 上一步，部署的MySQL端口为3306，与Nacos的MySQL端口会有冲突，所以需要修改`example/standalone-mysql-8.yaml`中的端口，如修改为`- "3310:3306"`
@@ -102,6 +123,7 @@ cd cloud-boot
 mvn clean install
 ```
 3. 运行项目
+- AuthApplication
 - ProductApplication
 - OrderApplication
 - UserApplication

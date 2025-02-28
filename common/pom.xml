@@ -15,6 +15,7 @@
         <module>common-core</module>
         <module>common-feign</module>
         <module>common-mybatis</module>
+        <module>common-security</module>
     </modules>
 
     <properties>

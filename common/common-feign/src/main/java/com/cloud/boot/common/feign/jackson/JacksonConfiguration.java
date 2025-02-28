@@ -19,8 +19,8 @@ public class JacksonConfiguration {
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
         return builder -> {
 
-            builder.simpleDateFormat(CommonConstant.NORMAL_DATETIME_FORMATTER);
             builder.serializerByType(Long.class, ToStringSerializer.instance);
+            builder.simpleDateFormat(CommonConstant.NORMAL_DATETIME_FORMATTER);
             builder.modules(new LocalDateTimeModule());
         };
     }

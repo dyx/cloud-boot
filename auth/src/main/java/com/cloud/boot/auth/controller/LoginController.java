@@ -1,13 +1,14 @@
 package com.cloud.boot.auth.controller;
 
-import com.cloud.boot.auth.util.JwtUtil;
-import com.cloud.boot.auth.util.SecurityUtil;
+import cn.dev33.satoken.stp.SaTokenInfo;
+import cn.dev33.satoken.stp.StpUtil;
+import com.cloud.boot.auth.model.dto.LoginDTO;
+import com.cloud.boot.common.core.exception.BizException;
 import com.cloud.boot.common.core.util.R;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,12 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class LoginController {
 
-    private final AuthenticationManager authenticationManager;
-    private final JwtUtil jwtUtil;
-
     @PostMapping("login")
-    public R<String> login(@RequestParam("username") String username, @RequestParam("password") String password) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        return R.ok(jwtUtil.generateToken(SecurityUtil.getUser(authentication)));
+    public R<SaTokenInfo> login(@Valid @RequestBody LoginDTO loginDTO) {
+
+        if (!"admin".equals(loginDTO.getUsername()) || !"123456".equals(loginDTO.getPassword())) {
+            throw new BizException("用户名或密码错误");
+        }
+
+        StpUtil.login(1L);
+
+        return R.ok(StpUtil.getTokenInfo());
+    }
+
+    @PostMapping("logout")
+    public R<Void> logout() {
+        StpUtil.logout();
+        return R.ok();
     }
 }
