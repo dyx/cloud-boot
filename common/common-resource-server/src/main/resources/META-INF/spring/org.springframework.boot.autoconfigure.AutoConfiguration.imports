@@ -1,0 +1,2 @@
+com.cloud.boot.common.resource.server.config.CustomSaTokenConfig
+com.cloud.boot.common.resource.server.service.impl.StpInterfaceImpl

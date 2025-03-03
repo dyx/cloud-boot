@@ -1,15 +1,9 @@
 package com.cloud.boot.auth.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
-import com.cloud.boot.auth.config.JsonRedisTemplate;
 import com.cloud.boot.common.core.util.R;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * @author lhd

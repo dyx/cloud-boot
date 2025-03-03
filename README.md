@@ -60,7 +60,7 @@ services:
 ```
 1. 使用上面的Yaml文件，部署 MySQL `docker compose up -d`
 2. 创建三个数据库：`order`、`product`、`user`
-3. 将`db`目录下的 SQL 在对应的数据库中执行
+3. 将`0_db`目录下的 SQL 在对应的数据库中执行
 #### Redis7
 1. 创建文件夹`~/develop/docker/docker-data/redis/conf`，下载官方配置文件，移动到该文件夹中
    - 官网配置文件地址 https://download.redis.io/redis-stable/redis.conf

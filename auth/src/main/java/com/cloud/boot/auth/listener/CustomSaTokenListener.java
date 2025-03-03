@@ -60,15 +60,11 @@ public class CustomSaTokenListener implements SaTokenListener {
 
     /** 每次创建Session时触发 */
     @Override
-    public void doCreateSession(String id) {
-        System.out.println("---------- 自定义侦听器实现 doCreateSession");
-    }
+    public void doCreateSession(String id) {}
 
     /** 每次注销Session时触发 */
     @Override
-    public void doLogoutSession(String id) {
-        System.out.println("---------- 自定义侦听器实现 doLogoutSession");
-    }
+    public void doLogoutSession(String id) {}
     
     /** 每次Token续期时触发 */
     @Override

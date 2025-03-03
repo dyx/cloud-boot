@@ -72,5 +72,10 @@
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-spring-webmvc-v6x-adapter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-core</artifactId>
+            <version>${sa-token.version}</version>
+        </dependency>
     </dependencies>
 </project>

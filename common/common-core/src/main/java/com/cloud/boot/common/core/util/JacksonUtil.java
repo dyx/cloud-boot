@@ -25,6 +25,15 @@ public class JacksonUtil {
         return "";
     }
 
+    public static byte[] toJsonBytes(Object obj) {
+        try {
+            return OBJECT_MAPPER.writeValueAsBytes(obj);
+        }
+        catch (Exception ignored) {
+        }
+        return new byte[0];
+    }
+
     public static void configObjectMapper(ObjectMapper objectMapper) {
         if (objectMapper != null) {
             objectMapper.setDateFormat(new SimpleDateFormat(CommonConstant.NORMAL_DATETIME_FORMATTER));
