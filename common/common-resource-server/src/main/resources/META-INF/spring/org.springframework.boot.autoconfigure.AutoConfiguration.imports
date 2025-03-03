@@ -1,2 +1,3 @@
-com.cloud.boot.common.resource.server.config.CustomSaTokenConfig
+com.cloud.boot.common.resource.server.ResourceServerAutoConfiguration
+com.cloud.boot.common.resource.server.config.WebMvcConfig
 com.cloud.boot.common.resource.server.service.impl.StpInterfaceImpl

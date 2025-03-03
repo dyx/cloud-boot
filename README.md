@@ -14,6 +14,7 @@
 - spring-cloud-alibaba 2023.0.3.2
 - mybatis-plus 3.5.10.1
 - mapstruct 1.6.3
+- sa-token 1.4.0
 - knife4j 4.5.0
 ## 项目结构
 ```
@@ -21,11 +22,13 @@
 │   ├── api-order
 │   ├── api-product
 │   └── api-user
-├── auth 授权服务
+├── auth 授权服务，颁发 token
 ├── common
+│   ├── common-config 公共配置
 │   ├── common-core 公共工具类核心包，全局常量、全局异常、统一响应结果
 │   ├── common-feign feign 扩展封装，全局异常处理、请求日志、接口文档配置、响应序列化配置
-│   └── common-mybatis mybatis 扩展封装，插件配置、自动填充字段
+│   ├── common-mybatis mybatis 扩展封装，插件配置、自动填充字段
+│   └── common-resource-server 公共鉴权
 ├── gateway 网关服务
 └── services 业务服务
     ├── service-order
