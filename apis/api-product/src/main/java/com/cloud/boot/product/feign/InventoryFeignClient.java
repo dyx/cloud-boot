@@ -1,6 +1,6 @@
 package com.cloud.boot.product.feign;
 
-import com.cloud.boot.common.core.constant.ServiceNameConstant;
+import com.cloud.boot.common.core.constant.ServiceConfig;
 import com.cloud.boot.common.core.util.R;
 import com.cloud.boot.product.feign.fallback.InventoryFeignClientFallback;
 import com.cloud.boot.product.model.dto.DeductStockDTO;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author lhd
  */
-@FeignClient(value = ServiceNameConstant.SERVICE_PRODUCT, path = "/inventory", fallback = InventoryFeignClientFallback.class)
+@FeignClient(value = ServiceConfig.Product.ID, path = "/inventory", fallback = InventoryFeignClientFallback.class)
 public interface InventoryFeignClient {
 
     @PostMapping("/stock/deduct/batch")

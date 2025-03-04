@@ -64,12 +64,3 @@ knife4j:
     discover:
       version: openapi3
       enabled: true
-    service-config:
-      service-user:
-        - group-name: 用户服务
-      service-order:
-        - group-name: 订单服务
-      service-product:
-        - group-name: 商品服务
-      auth:
-        - group-name: 授权服务

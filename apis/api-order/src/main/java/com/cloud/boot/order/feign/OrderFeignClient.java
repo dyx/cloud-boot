@@ -1,6 +1,6 @@
 package com.cloud.boot.order.feign;
 
-import com.cloud.boot.common.core.constant.ServiceNameConstant;
+import com.cloud.boot.common.core.constant.ServiceConfig;
 import com.cloud.boot.common.core.util.R;
 import com.cloud.boot.order.feign.fallback.OrderFeignClientFallback;
 import com.cloud.boot.order.model.dto.SaveOrderDTO;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * @author lhd
  */
-@FeignClient(value = ServiceNameConstant.SERVICE_ORDER, path = "/order", fallback = OrderFeignClientFallback.class)
+@FeignClient(value = ServiceConfig.Order.ID, path = "/order", fallback = OrderFeignClientFallback.class)
 public interface OrderFeignClient {
 
     @PostMapping
