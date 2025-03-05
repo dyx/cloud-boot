@@ -1,6 +1,4 @@
 package com.cloud.boot.order.service.impl;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.LocalDateTimeUtil;
@@ -9,21 +7,19 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cloud.boot.common.core.exception.BizException;
 import com.cloud.boot.order.mapper.OrderMapper;
-import com.cloud.boot.order.model.converter.OrderConverter;
 import com.cloud.boot.order.model.converter.OrderItemConverter;
 import com.cloud.boot.order.model.dto.SaveOrderDTO;
 import com.cloud.boot.order.model.dto.SaveOrderItemDTO;
 import com.cloud.boot.order.model.entity.OrderDO;
 import com.cloud.boot.order.model.entity.OrderItemDO;
-import com.cloud.boot.order.model.vo.OrderVO;
 import com.cloud.boot.order.service.OrderItemService;
 import com.cloud.boot.order.service.OrderService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +55,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
         orderDO.setUserId(0L);
         orderDO.setOrderNo(LocalDateTimeUtil.format(LocalDateTime.now(), "yyMMddHHmmss") + StrUtil.padPre(String.valueOf(RandomUtil.randomInt(1, 1000)), 3,"0"));
         orderDO.setTotalAmount(totalAmount);
-        orderDO.setOrderStatus(0);
         boolean saveFlag = save(orderDO);
         if (!saveFlag) {
             throw new BizException("创建订单失败");

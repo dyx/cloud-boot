@@ -1,6 +1,5 @@
 package com.cloud.boot.user.model.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.cloud.boot.common.mybatis.base.BaseDO;
 import lombok.Data;
@@ -9,16 +8,10 @@ import lombok.EqualsAndHashCode;
 /**
  * @author lhd
  */
-@TableName("usr_user")
+@TableName("sys_user")
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class UserDO extends BaseDO {
-
-    /**
-     * 用户ID
-     */
-    @TableId
-    private Long id;
+public class SysUserDO extends BaseDO {
 
     /**
      * 用户名
@@ -48,5 +41,5 @@ public class UserDO extends BaseDO {
     /**
      * 用户状态
      */
-    private Integer status;
+    private String status;
 }

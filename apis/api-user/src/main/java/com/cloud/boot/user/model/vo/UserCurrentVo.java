@@ -6,13 +6,12 @@ import lombok.Data;
  * @author lhd
  */
 @Data
-public class UserVo {
+public class UserCurrentVo {
 
     private Long id;
     private String username;
-    private String password;
     private String nickname;
     private String email;
     private String phone;
-    private Integer status;
+    private String status;
 }

@@ -2,14 +2,16 @@ package com.cloud.boot.user.controller;
 
 import com.cloud.boot.common.core.util.R;
 import com.cloud.boot.common.core.util.RHandler;
+import com.cloud.boot.common.feign.annotation.Inner;
 import com.cloud.boot.order.feign.OrderFeignClient;
 import com.cloud.boot.order.model.dto.SaveOrderDTO;
 import com.cloud.boot.order.model.dto.SaveOrderItemDTO;
 import com.cloud.boot.product.feign.InventoryFeignClient;
 import com.cloud.boot.product.model.dto.DeductStockDTO;
 import com.cloud.boot.user.model.dto.SaveUserDTO;
+import com.cloud.boot.user.model.vo.UserAuthVo;
 import com.cloud.boot.user.model.vo.UserInfoVo;
-import com.cloud.boot.user.service.UserService;
+import com.cloud.boot.user.service.SysUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -27,21 +29,28 @@ import java.util.List;
 @RequestMapping("/user")
 @RestController
 @RequiredArgsConstructor
-public class UserController {
+public class SysUserController {
 
     private final InventoryFeignClient inventoryFeignClient;
     private final OrderFeignClient orderFeignClient;
-    private final UserService userService;
+    private final SysUserService sysUserService;
 
+    @Inner
     @GetMapping("/username/{username}")
-    public R<UserInfoVo> getUserInfoByUsername(@PathVariable("username") String username) {
-        return R.ok(userService.getUserInfoByUsername(username));
+    public R<UserAuthVo> getUserAuthInfoByUsername(@PathVariable("username") String username) {
+        return R.ok(sysUserService.getUserAuthInfoByUsername(username));
+    }
+
+    @Operation(summary = "获取当前用户信息")
+    @GetMapping("/current")
+    public R<UserInfoVo> getCurrentUserInfo() {
+        return R.ok(sysUserService.getCurrentUserInfo());
     }
 
     @Operation(summary = "创建用户")
     @PostMapping
     public R<?> saveUser(@Valid @RequestBody SaveUserDTO dto) {
-        userService.saveUser(dto);
+        sysUserService.saveUser(dto);
         return R.ok();
     }
 

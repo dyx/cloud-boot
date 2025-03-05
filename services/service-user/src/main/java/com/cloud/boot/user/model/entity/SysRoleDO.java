@@ -1,23 +1,25 @@
-package com.cloud.boot.product.model.entity;
+package com.cloud.boot.user.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.cloud.boot.common.mybatis.base.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.math.BigDecimal;
-
 /**
  * @author lhd
  */
-@TableName("pdt_product")
 @EqualsAndHashCode(callSuper = true)
+@TableName("sys_role")
 @Data
-public class ProductDO extends BaseDO {
+public class SysRoleDO extends BaseDO {
 
+    /**
+     * 角色名称
+     */
     private String name;
 
-    private BigDecimal price;
-
-    private String status;
+    /**
+     * 描述
+     */
+    private String description;
 }

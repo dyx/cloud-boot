@@ -21,8 +21,12 @@ public class RHandler<T> {
         return new RHandler<>(result);
     }
 
-    public Optional<T> getData() {
+    public Optional<T> getOptionalData() {
         return Optional.ofNullable(result != null ? result.getData() : null);
+    }
+
+    public T getData() {
+        return result != null ? result.getData() : null;
     }
 
     public void failThenThrow() {

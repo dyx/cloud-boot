@@ -1,13 +1,11 @@
 package com.cloud.boot.order.model.entity;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.cloud.boot.common.mybatis.base.BaseDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.math.BigDecimal;
 
 /**
  * @author lhd
@@ -16,9 +14,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class OrderItemDO extends BaseDO {
-
-    @TableId
-    private Long id;
 
     /**
      * 订单ID

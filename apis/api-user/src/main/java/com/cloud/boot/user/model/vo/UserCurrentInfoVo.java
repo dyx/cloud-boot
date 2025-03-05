@@ -8,11 +8,9 @@ import java.util.List;
  * @author lhd
  */
 @Data
-public class UserInfoVo {
+public class UserCurrentInfoVo {
 
-    private Long id;
-    private String username;
-    private String nickname;
+    private UserAuthVo userAuthVo;
     private List<String> permissionList;
     private List<Long> roleIdList;
 }

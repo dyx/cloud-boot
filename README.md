@@ -134,3 +134,18 @@ mvn clean install
 ### 三、访问项目
 接口文档地址 `http://localhost:9999/doc.html`
 ## 部署
+
+### 四、其他
+#### 数据库
+> 建表模板
+```sql
+CREATE TABLE `table_name` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `create_by` bigint  NOT NULL DEFAULT 0 COMMENT '创建人',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_by` bigint  NOT NULL DEFAULT 0 COMMENT '修改人',
+  `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `delete_time` datetime null comment '删除时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB  COMMENT='表名';
+```

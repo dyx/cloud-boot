@@ -68,6 +68,9 @@ mybatis-plus:
       where-strategy: not_empty
       insert-strategy: not_empty
       update-strategy: not_null
+      logic-delete-field: delete_time
+      logic-delete-value: now()
+      logic-not-delete-value: 'null'
   configuration:
     jdbc-type-for-null: 'null' # 是否设置字段为null
     call-setters-on-nulls: true # 是否调用set方法时传入null值
@@ -90,6 +93,10 @@ sa-token:
 
 knife4j:
   enable: true
+
+logging:
+  level:
+    com.cloud.boot.user.mapper: debug
 
 custom:
   logfile:

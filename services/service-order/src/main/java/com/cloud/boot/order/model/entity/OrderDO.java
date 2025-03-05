@@ -9,7 +9,6 @@ import lombok.EqualsAndHashCode;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * @author lhd
@@ -32,5 +31,5 @@ public class OrderDO extends BaseDO implements Serializable {
 
     private BigDecimal totalAmount;
 
-    private Integer orderStatus;
+    private String orderStatus;
 }

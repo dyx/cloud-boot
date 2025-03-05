@@ -12,5 +12,6 @@ public interface CommonConstant {
     String NORMAL_DATETIME_FORMATTER = "yyyy-MM-dd HH:mm:ss";
 
     String REQUEST_HEADER_TOKEN_NAME = "Authorization";
-    String REQUEST_HEADER_USER_ID = "X-User-ID";
+    String REQUEST_HEADER_INNER = "Inner";
+    String REQUEST_HEADER_START_TIME = "Start-Time";
 }

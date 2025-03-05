@@ -6,7 +6,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * @author lhd
@@ -26,7 +25,7 @@ public class OrderVO implements Serializable {
 
     private BigDecimal totalAmount;
 
-    private Integer orderStatus;
+    private String orderStatus;
 
     private LocalDateTime createTime;
 

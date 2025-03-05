@@ -20,26 +20,18 @@ spring:
           uri: lb://auth
           predicates:
             - Path=/auth/**
-          filters:
-            - StripPrefix=1
         - id: service-user
           uri: lb://service-user
           predicates:
             - Path=/user/**
-          filters:
-            - StripPrefix=1
         - id: service-order
           uri: lb://service-order
           predicates:
             - Path=/order/**
-          filters:
-            - StripPrefix=1
         - id: service-product
           uri: lb://service-product
           predicates:
             - Path=/product/**
-          filters:
-            - StripPrefix=1
   config:
     import: nacos:${spring.application.name}-dev.yml
 
