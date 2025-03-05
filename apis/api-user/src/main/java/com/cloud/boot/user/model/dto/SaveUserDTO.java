@@ -1,4 +1,4 @@
-package com.cloud.boot.auth.model.dto;
+package com.cloud.boot.user.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -7,10 +7,14 @@ import lombok.Data;
  * @author lhd
  */
 @Data
-public class LoginDTO {
+public class SaveUserDTO {
 
     @NotBlank
     private String username;
     @NotBlank
     private String password;
+    @NotBlank
+    private String nickname;
+    private String email;
+    private String phone;
 }

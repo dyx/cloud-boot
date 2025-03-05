@@ -24,13 +24,14 @@ public enum GlobalErrorCodeEnum {
     /**
      * 关系型数据库
      */
+    DB_DATA_DUPLICATE_KEY(1103, "重复值异常"),
     DB_DATA_NO_DEFAULT_VALUE(1102, "非空字段没有默认值"),
     DB_DATA_TOO_LONG(1101, "字段超长"),
     DB_DATA_INTEGRITY_VIOLATION(1100, "数据完整性异常"),
     /**
      * 接口访问错误
      */
-    REST_SERVICE_UNAVAILABLE(1005, "服务不可用"),
+    REST_SERVICE_UNAVAILABLE(1005, "服务不可用，请稍后重试"),
     REST_ACCESS_DENIED(1004, "访问被拒绝"),
     REST_MEDIA_TYPE_ERROR(1003, "不支持的媒体类型"),
     REST_REQUEST_METHOD_ERROR(1002,"请求方式错误"),

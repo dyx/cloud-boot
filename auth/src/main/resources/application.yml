@@ -14,6 +14,11 @@ spring:
       transport:
         dashboard: 127.0.0.1:8080
       eager: true
+    openfeign:
+      client:
+        config:
+          default:
+            loggerLevel: full
   config:
     import:
       - nacos:${spring.application.name}-dev.yml
@@ -21,7 +26,7 @@ spring:
     redis:
       host: 127.0.0.1
       port: 6379
-      database: 0
+      database: 1
       password: 123456
       connect-timeout: 5s
       timeout: 5s
@@ -35,6 +40,21 @@ feign:
   sentinel:
     enabled: true
 
+sa-token:
+  alone-redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    password: 123456
+    connect-timeout: 5s
+    timeout: 5s
+    lettuce:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1ms
+
 knife4j:
   enable: true
 
@@ -42,3 +62,6 @@ custom:
   logfile:
     path: .logs/${spring.application.name}
 
+logging:
+  level:
+    com.cloud.boot.user.feign: debug

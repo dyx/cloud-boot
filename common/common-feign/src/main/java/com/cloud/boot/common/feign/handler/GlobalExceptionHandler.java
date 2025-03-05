@@ -8,6 +8,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -134,7 +135,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 数据库-数据完整性异常
+     * 数据库-数据完整性违规异常
      * @param e
      * @return
      */
@@ -143,9 +144,14 @@ public class GlobalExceptionHandler {
 
         log.error("数据库异常，原因：{}", e.getMessage());
 
+        if (e instanceof DuplicateKeyException) {
+            return R.fail(GlobalErrorCodeEnum.DB_DATA_DUPLICATE_KEY);
+        }
+
         if (e.getCause() instanceof DataTruncation) {
             return R.fail(GlobalErrorCodeEnum.DB_DATA_TOO_LONG);
         }
+
         if (e.getCause() instanceof SQLException exception) {
             if (exception.getErrorCode() == SQL_ERROR_CODE_NO_DEFAULT_VALUE) {
                 return R.fail(GlobalErrorCodeEnum.DB_DATA_NO_DEFAULT_VALUE);

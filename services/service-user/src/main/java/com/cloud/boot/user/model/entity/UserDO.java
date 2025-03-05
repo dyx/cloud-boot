@@ -46,7 +46,7 @@ public class UserDO extends BaseDO {
     private String phone;
 
     /**
-     * 用户状态：0-禁用，1-启用
+     * 用户状态
      */
     private Integer status;
 }

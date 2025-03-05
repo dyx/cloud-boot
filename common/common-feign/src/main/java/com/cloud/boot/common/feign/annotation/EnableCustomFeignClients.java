@@ -18,5 +18,4 @@ public @interface EnableCustomFeignClients {
 
 	@AliasFor(annotation = EnableFeignClients.class, attribute = "basePackages")
 	String[] basePackages() default { "com.cloud.boot" };
-
 }

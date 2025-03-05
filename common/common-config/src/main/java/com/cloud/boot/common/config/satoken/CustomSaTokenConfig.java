@@ -15,7 +15,8 @@ public class CustomSaTokenConfig {
     @Bean
     @Primary
     public SaTokenConfig getSaTokenConfigPrimary() {
-        cn.dev33.satoken.config.SaTokenConfig config = new cn.dev33.satoken.config.SaTokenConfig();
+
+        SaTokenConfig config = new SaTokenConfig();
         config.setTokenName(CommonConstant.REQUEST_HEADER_TOKEN_NAME);
         config.setTimeout(24*3600);
         config.setActiveTimeout(-1);

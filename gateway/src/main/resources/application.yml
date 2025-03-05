@@ -42,20 +42,21 @@ spring:
             - StripPrefix=1
   config:
     import: nacos:${spring.application.name}-dev.yml
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 6379
-      database: 0
-      password: 123456
-      connect-timeout: 5s
-      timeout: 5s
-      lettuce:
-        pool:
-          min-idle: 0
-          max-idle: 8
-          max-active: 8
-          max-wait: -1ms
+
+sa-token:
+  alone-redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    password: 123456
+    connect-timeout: 5s
+    timeout: 5s
+    lettuce:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1ms
 
 knife4j:
   gateway:
