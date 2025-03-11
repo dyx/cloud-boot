@@ -24,7 +24,7 @@ public enum GlobalErrorCodeEnum {
     /**
      * 关系型数据库
      */
-    DB_DATA_DUPLICATE_KEY(1103, "重复值异常"),
+    DB_DATA_DUPLICATE_KEY(1103, "唯一值已存在"),
     DB_DATA_NO_DEFAULT_VALUE(1102, "非空字段没有默认值"),
     DB_DATA_TOO_LONG(1101, "字段超长"),
     DB_DATA_INTEGRITY_VIOLATION(1100, "数据完整性异常"),

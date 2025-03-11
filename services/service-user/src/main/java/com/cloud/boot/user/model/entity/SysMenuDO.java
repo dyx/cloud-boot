@@ -81,5 +81,5 @@ public class SysMenuDO {
      * 删除时间
      */
     @TableLogic
-    private LocalDateTime deleteTime;
+    private Long deleteTime;
 }

@@ -10,7 +10,7 @@ create table ord_order
     create_time  datetime       default CURRENT_TIMESTAMP null comment '创建时间',
     update_by    bigint         default 0                 not null comment '更新人',
     update_time  datetime                                 null on update CURRENT_TIMESTAMP comment '更新时间',
-    delete_time  datetime                                 null comment '删除时间',
+    delete_time  bigint         default 0                 not null comment '删除时间',
     constraint order_no
         unique (order_no)
 )
@@ -30,7 +30,7 @@ create table ord_order_item
     create_time  datetime       default CURRENT_TIMESTAMP null comment '创建时间',
     update_by    bigint         default 0                 not null comment '更新人',
     update_time  datetime                                 null on update CURRENT_TIMESTAMP comment '更新时间',
-    delete_time  datetime                                 null comment '删除时间'
+    delete_time  bigint         default 0                 not null comment '删除时间'
 )
     comment '订单明细';
 

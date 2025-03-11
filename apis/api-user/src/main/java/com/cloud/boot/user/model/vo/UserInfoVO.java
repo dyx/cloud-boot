@@ -8,7 +8,7 @@ import java.util.List;
  * @author lhd
  */
 @Data
-public class UserInfoVo {
+public class UserInfoVO {
 
     private Long id;
     private String username;

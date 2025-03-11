@@ -145,7 +145,7 @@ CREATE TABLE `table_name` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_by` bigint  NOT NULL DEFAULT 0 COMMENT '修改人',
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `delete_time` datetime null comment '删除时间',
+  `delete_time` bigint default 0 not null comment '删除时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB  COMMENT='表名';
 ```

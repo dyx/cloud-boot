@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class UserCurrentInfoVo {
 
-    private UserAuthVo userAuthVo;
+    private UserAuthVO userAuthVo;
     private List<String> permissionList;
     private List<Long> roleIdList;
 }

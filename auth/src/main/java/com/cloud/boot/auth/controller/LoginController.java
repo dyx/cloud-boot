@@ -8,7 +8,7 @@ import com.cloud.boot.common.core.exception.BizException;
 import com.cloud.boot.common.core.util.R;
 import com.cloud.boot.common.core.util.RHandler;
 import com.cloud.boot.user.feign.UserFeignClient;
-import com.cloud.boot.user.model.vo.UserAuthVo;
+import com.cloud.boot.user.model.vo.UserAuthVO;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class LoginController {
     @PostMapping("login")
     public R<SaTokenInfo> login(@Valid @RequestBody LoginDTO loginDTO) {
 
-        UserAuthVo userAuthVo = RHandler.of(userFeignClient.getUserAuthInfoByUsername(loginDTO.getUsername())).getData();
+        UserAuthVO userAuthVo = RHandler.of(userFeignClient.getUserAuthInfoByUsername(loginDTO.getUsername())).getData();
         if (userAuthVo == null) {
             throw new BizException("用户名或密码错误");
         }
