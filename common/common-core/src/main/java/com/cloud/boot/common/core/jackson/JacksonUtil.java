@@ -1,9 +1,6 @@
-package com.cloud.boot.common.core.util;
+package com.cloud.boot.common.core.jackson;
 
-import com.cloud.boot.common.core.constant.CommonConstant;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.text.SimpleDateFormat;
 
 /**
  * @author lhd
@@ -36,8 +33,7 @@ public class JacksonUtil {
 
     public static void configObjectMapper(ObjectMapper objectMapper) {
         if (objectMapper != null) {
-            objectMapper.setDateFormat(new SimpleDateFormat(CommonConstant.NORMAL_DATETIME_FORMATTER));
-            objectMapper.registerModule(new LocalDateTimeModule());
+            objectMapper.registerModule(new CustomSimpleModule());
         }
     }
 }

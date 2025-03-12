@@ -1,7 +1,7 @@
 package com.cloud.boot.gateway.handler;
 
 import com.cloud.boot.common.core.constant.enums.GlobalErrorCodeEnum;
-import com.cloud.boot.common.core.util.JacksonUtil;
+import com.cloud.boot.common.core.jackson.JacksonUtil;
 import com.cloud.boot.common.core.util.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;

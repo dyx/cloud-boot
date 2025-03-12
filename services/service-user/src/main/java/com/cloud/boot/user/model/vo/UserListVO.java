@@ -9,6 +9,9 @@ import lombok.Data;
 @Data
 public class UserListVO {
 
+    @Schema(description = "用户id")
+    private String id;
+
     @Schema(description = "用户名")
     private String username;
 

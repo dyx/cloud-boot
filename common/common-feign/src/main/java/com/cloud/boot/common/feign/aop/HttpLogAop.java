@@ -1,8 +1,6 @@
 package com.cloud.boot.common.feign.aop;
 
-import com.cloud.boot.common.core.constant.CommonConstant;
-import com.cloud.boot.common.core.util.JacksonUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.cloud.boot.common.core.jackson.JacksonUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -14,8 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import java.text.SimpleDateFormat;
 
 /**
  * @author lhd

@@ -1,6 +1,7 @@
 package com.cloud.boot.user.service.impl;
 
 import cn.dev33.satoken.secure.BCrypt;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -64,11 +65,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
     @Override
     public IPage<UserListVO> getUserPage(UserPageQuery query) {
 
-        IPage<SysUserDO> page = page(new Page<>(query.getPage(), query.getSize()),
+        IPage<SysUserDO> page = page(new Page<>(query.getCurrent(), query.getSize()),
                 Wrappers.<SysUserDO>lambdaQuery()
-                        .like(SysUserDO::getUsername, query.getUsername())
-                        .like(SysUserDO::getNickname, query.getNickname())
-                        .eq(SysUserDO::getStatus, query.getStatus())
+                        .like(StrUtil.isNotBlank(query.getUsername()), SysUserDO::getUsername, query.getUsername())
+                        .like(StrUtil.isNotBlank(query.getNickname()), SysUserDO::getNickname, query.getNickname())
+                        .eq(StrUtil.isNotBlank(query.getStatus()), SysUserDO::getStatus, query.getStatus())
         );
         IPage<UserListVO> voPage = SysUserConverter.INSTANCE.doPage2VoPage(page);
         return voPage;
@@ -78,8 +79,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
     public List<UserListVO> listUsers(UserListQuery query) {
         List<SysUserDO> list = list(new Page<>(1, 100),
                 Wrappers.<SysUserDO>lambdaQuery()
-                        .like(SysUserDO::getUsername, query.getUsername())
-                        .like(SysUserDO::getNickname, query.getNickname())
+                        .like(StrUtil.isNotBlank(query.getUsername()), SysUserDO::getUsername, query.getUsername())
+                        .like(StrUtil.isNotBlank(query.getNickname()), SysUserDO::getNickname, query.getNickname())
                         .eq(SysUserDO::getStatus, UserStatusEnum.ENABLED.getValue())
         );
         List<UserListVO> voList = SysUserConverter.INSTANCE.doList2VoList(list);
