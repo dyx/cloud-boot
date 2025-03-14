@@ -1,4 +1,4 @@
-package com.cloud.boot.common.feign.aop;
+package com.cloud.boot.common.config.aop;
 
 import com.cloud.boot.common.core.jackson.JacksonUtil;
 import jakarta.servlet.http.HttpServletRequest;

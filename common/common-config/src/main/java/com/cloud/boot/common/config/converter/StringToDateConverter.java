@@ -1,4 +1,4 @@
-package com.cloud.boot.common.feign.converter;
+package com.cloud.boot.common.config.converter;
 
 import com.cloud.boot.common.core.constant.CommonConstant;
 import org.springframework.core.convert.converter.Converter;

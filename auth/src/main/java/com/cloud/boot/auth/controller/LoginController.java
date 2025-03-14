@@ -4,6 +4,7 @@ import cn.dev33.satoken.secure.BCrypt;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.cloud.boot.auth.model.dto.LoginDTO;
+import com.cloud.boot.common.core.constant.enums.UserStatusEnum;
 import com.cloud.boot.common.core.exception.BizException;
 import com.cloud.boot.common.core.util.R;
 import com.cloud.boot.common.core.util.RHandler;
@@ -36,6 +37,10 @@ public class LoginController {
 
         if (!BCrypt.checkpw(loginDTO.getPassword(), userAuthVo.getPassword())) {
             throw new BizException("用户名或密码错误");
+        }
+
+        if (UserStatusEnum.DISABLED.getValue().equals(userAuthVo.getStatus())) {
+            throw new BizException("用户已被禁用");
         }
 
         StpUtil.login(userAuthVo.getId());

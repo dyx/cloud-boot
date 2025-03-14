@@ -25,7 +25,7 @@ public interface SysUserService {
 
     List<UserListVO> listUsers(UserListQuery query);
 
-    UserDetailVO getUserDetailById(Long id);
+    UserDetailVO getUserById(Long id);
 
     void saveUser(SaveUserDTO dto);
 

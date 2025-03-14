@@ -1,6 +1,6 @@
 package com.cloud.boot.common.resource.server;
 
-import com.cloud.boot.common.config.satoken.CustomSaTokenConfig;
+import com.cloud.boot.common.resource.server.config.CustomSaTokenConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

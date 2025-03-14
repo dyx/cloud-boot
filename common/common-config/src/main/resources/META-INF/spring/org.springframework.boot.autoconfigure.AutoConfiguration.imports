@@ -1,1 +1,4 @@
-com.cloud.boot.common.config.satoken.CustomSaTokenConfig
+com.cloud.boot.common.config.web.WebMvcConfig
+com.cloud.boot.common.config.jackson.JacksonConfig
+com.cloud.boot.common.config.swagger.SwaggerConfig
+com.cloud.boot.common.config.ConfigAutoConfiguration

@@ -1,4 +1,4 @@
-package com.cloud.boot.common.feign.swagger;
+package com.cloud.boot.common.config.swagger;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -88,7 +88,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
     }
 
     @Override
-    public UserDetailVO getUserDetailById(Long id) {
+    public UserDetailVO getUserById(Long id) {
         UserDetailVO vo = SysUserConverter.INSTANCE.do2detailVo(getById(id));
         return vo;
     }

@@ -68,8 +68,8 @@ public class SysUserController {
 
     @Operation(summary = "获取用户详情")
     @GetMapping("/{id}")
-    public R<UserDetailVO> getUserDetailById(@PathVariable("id") Long id) {
-        return R.ok(sysUserService.getUserDetailById(id));
+    public R<UserDetailVO> getUserById(@PathVariable("id") Long id) {
+        return R.ok(sysUserService.getUserById(id));
     }
 
     @Operation(summary = "创建用户")

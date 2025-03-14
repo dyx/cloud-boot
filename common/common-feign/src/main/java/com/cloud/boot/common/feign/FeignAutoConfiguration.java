@@ -1,9 +1,7 @@
 package com.cloud.boot.common.feign;
 
-import com.cloud.boot.common.feign.aop.HttpLogAop;
 import com.cloud.boot.common.feign.aop.InnerAop;
 import com.cloud.boot.common.feign.interceptor.FeignInterceptor;
-import com.cloud.boot.common.feign.sentinel.CustomBlockExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,16 +16,6 @@ public class FeignAutoConfiguration {
 	@Bean
 	public InnerAop innerAop() {
 		return new InnerAop();
-	}
-
-	@Bean
-	public HttpLogAop httpLogAop() {
-		return new HttpLogAop();
-	}
-
-	@Bean
-	public CustomBlockExceptionHandler blockHandler() {
-		return new CustomBlockExceptionHandler();
 	}
 
 	@Bean

@@ -1,4 +1,4 @@
-package com.cloud.boot.common.feign.sentinel;
+package com.cloud.boot.common.config.sentinel;
 
 import com.alibaba.csp.sentinel.adapter.spring.webmvc_v6x.callback.BlockExceptionHandler;
 import com.alibaba.csp.sentinel.slots.block.BlockException;

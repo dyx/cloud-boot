@@ -1,4 +1,4 @@
-package com.cloud.boot.common.feign.handler;
+package com.cloud.boot.common.config.handler;
 
 import com.cloud.boot.common.core.constant.enums.GlobalErrorCodeEnum;
 import com.cloud.boot.common.core.exception.BizException;

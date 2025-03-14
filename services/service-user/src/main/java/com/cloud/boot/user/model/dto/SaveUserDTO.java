@@ -27,4 +27,8 @@ public class SaveUserDTO {
 
     @Schema(description = "手机号")
     private String phone;
+
+    @NotBlank
+    @Schema(description = "状态")
+    private String status;
 }

@@ -1,4 +1,4 @@
-package com.cloud.boot.common.feign.jackson;
+package com.cloud.boot.common.config.jackson;
 
 import com.cloud.boot.common.core.jackson.CustomSimpleModule;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * @author lhd
  */
 @Configuration
-public class JacksonConfiguration {
+public class JacksonConfig {
 
     @Bean
     @ConditionalOnMissingBean

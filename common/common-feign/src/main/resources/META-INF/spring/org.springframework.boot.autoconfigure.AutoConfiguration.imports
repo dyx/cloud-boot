@@ -1,5 +1,1 @@
-com.cloud.boot.common.feign.config.WebConfig
-com.cloud.boot.common.feign.swagger.SwaggerConfig
-com.cloud.boot.common.feign.jackson.JacksonConfiguration
-com.cloud.boot.common.feign.handler.GlobalExceptionHandler
 com.cloud.boot.common.feign.FeignAutoConfiguration
