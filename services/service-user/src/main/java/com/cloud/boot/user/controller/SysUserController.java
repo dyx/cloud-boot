@@ -1,5 +1,6 @@
 package com.cloud.boot.user.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.cloud.boot.common.core.util.R;
 import com.cloud.boot.common.core.util.RHandler;
@@ -72,6 +73,7 @@ public class SysUserController {
         return R.ok(sysUserService.getUserById(id));
     }
 
+    @SaCheckPermission("user:save")
     @Operation(summary = "创建用户")
     @PostMapping
     public R<?> saveUser(@Valid @RequestBody SaveUserDTO dto) {
@@ -79,6 +81,7 @@ public class SysUserController {
         return R.ok();
     }
 
+    @SaCheckPermission("user:update")
     @Operation(summary = "修改用户")
     @PutMapping("/{id}")
     public R<?> updateUserById(@PathVariable("id") Long id, @Valid @RequestBody UpdateUserDTO dto) {
@@ -86,6 +89,7 @@ public class SysUserController {
         return R.ok();
     }
 
+    @SaCheckPermission("user:remove")
     @Operation(summary = "删除用户")
     @DeleteMapping("/{id}")
     public R<?> removeUserById(@PathVariable("id") Long id) {

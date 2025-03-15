@@ -2,7 +2,7 @@ package com.cloud.boot.common.config.swagger;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,10 +12,10 @@ import org.springframework.context.annotation.Configuration;
  */
 @EnableConfigurationProperties(SwapperProperties.class)
 @Configuration
+@RequiredArgsConstructor
 public class SwaggerConfig {
 
-    @Autowired
-    private SwapperProperties swapperProperties;
+    private final SwapperProperties swapperProperties;
 
     @Bean
     public OpenAPI customOpenAPI() {

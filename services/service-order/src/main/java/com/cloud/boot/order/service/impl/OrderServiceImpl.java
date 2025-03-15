@@ -14,7 +14,7 @@ import com.cloud.boot.order.model.entity.OrderDO;
 import com.cloud.boot.order.model.entity.OrderItemDO;
 import com.cloud.boot.order.service.OrderItemService;
 import com.cloud.boot.order.service.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,10 +28,10 @@ import java.util.List;
  * 订单 服务实现类
  */
 @Service
+@RequiredArgsConstructor
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderDO> implements OrderService {
 
-    @Autowired
-    private OrderItemService orderItemService;
+    private final OrderItemService orderItemService;
 
     @Transactional(rollbackFor = Exception.class)
     @Override

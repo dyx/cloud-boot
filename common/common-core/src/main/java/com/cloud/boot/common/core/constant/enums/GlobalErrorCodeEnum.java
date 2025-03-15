@@ -1,7 +1,7 @@
 package com.cloud.boot.common.core.constant.enums;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @author lhd
@@ -10,7 +10,7 @@ import lombok.Getter;
  * <p>业务错误码，起始值100000，每1000个为一大类</p>
  */
 @Getter
-@AllArgsConstructor
+@RequiredArgsConstructor
 public enum GlobalErrorCodeEnum {
 
     /**

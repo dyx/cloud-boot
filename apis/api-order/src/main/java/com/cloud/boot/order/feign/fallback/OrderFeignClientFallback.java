@@ -12,6 +12,6 @@ public class OrderFeignClientFallback implements OrderFeignClient {
 
     @Override
     public R<?> saveOrder(SaveOrderDTO dto) {
-        return R.fail(GlobalErrorCodeEnum.UNKNOWN_ERROR);
+        return R.fail(GlobalErrorCodeEnum.REST_SERVICE_UNAVAILABLE);
     }
 }

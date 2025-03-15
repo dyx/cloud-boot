@@ -136,6 +136,31 @@ mvn clean install
 ## 部署
 
 ### 四、其他
+#### 命名规范
+- Service / Mapper
+  - get[User]，获取单个对象
+  - list[Users]，获取列表对象，复数结尾
+  - count[User]，获取统计值
+  - save / insert[User]，新增
+  - remove / delete[User]，删除
+  - update[User]，修改
+  - Controller 层的方法命名与 Service 一致
+- model
+  - 数据对象：[xxx]DO，xxx为表名，如 SysUserDO
+  - 数据传输对象：[xxx]DTO，xxx为领域相关操作名，如 SaveUserDTO
+  - 展示对象：[xxx]VO，xxx为页面名称，如 UserListVO
+- permission
+  - 领域对象:操作，如 user:save、user:remove、user:update
+#### 使用规范
+- 依赖注入，推荐使用构造器注入，搭配 @RequiredArgsConstructor 注解使用
+  - ，搭配 @RequiredArgsConstructor 注解，该注解生成的构造参数为：仅 final 字段和未初始化的 @NonNull 字段
+```java
+@Controller
+@RequiredArgsConstructor
+public class UserController {
+    private final UserService userService;
+}
+```
 #### 数据库
 > 建表模板
 ```sql

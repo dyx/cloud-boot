@@ -24,11 +24,9 @@ public class InnerAop {
     public void before(JoinPoint joinPoint, Inner innerAnnotation) {
 
         HttpServletRequest request = getRequest();
-        if (request != null) {
-            String innerValue = request.getHeader(CommonConstant.REQUEST_HEADER_INNER);
-            if (innerAnnotation != null && !"true".equals(innerValue)) {
-                throw new BizException(GlobalErrorCodeEnum.REST_ACCESS_DENIED);
-            }
+        String innerValue = request != null ? request.getHeader(CommonConstant.REQUEST_HEADER_INNER) : "";
+        if (!"true".equals(innerValue)) {
+            throw new BizException(GlobalErrorCodeEnum.REST_ACCESS_DENIED);
         }
     }
 

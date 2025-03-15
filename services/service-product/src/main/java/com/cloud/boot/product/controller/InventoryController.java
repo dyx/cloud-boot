@@ -6,7 +6,7 @@ import com.cloud.boot.product.service.InventoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,10 +22,10 @@ import java.util.List;
 @Tag(name = "库存接口")
 @RequestMapping("inventory")
 @RestController
+@RequiredArgsConstructor
 public class InventoryController {
 
-    @Autowired
-    private InventoryService inventoryService;
+    private final InventoryService inventoryService;
 
     @Operation(summary = "批量扣减库存")
     @PostMapping("/stock/deduct/batch")

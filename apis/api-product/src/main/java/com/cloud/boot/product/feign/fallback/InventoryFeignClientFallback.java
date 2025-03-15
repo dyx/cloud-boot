@@ -14,6 +14,6 @@ public class InventoryFeignClientFallback implements InventoryFeignClient {
 
     @Override
     public R<?> deductStockBatch(List<DeductStockDTO> dtoList) {
-        return R.fail(GlobalErrorCodeEnum.UNKNOWN_ERROR);
+        return R.fail(GlobalErrorCodeEnum.REST_SERVICE_UNAVAILABLE);
     }
 }

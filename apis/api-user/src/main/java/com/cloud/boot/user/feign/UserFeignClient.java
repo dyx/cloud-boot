@@ -4,6 +4,7 @@ import com.cloud.boot.common.core.constant.ServiceConfig;
 import com.cloud.boot.common.core.util.R;
 import com.cloud.boot.user.feign.fallback.UserFeignClientFallback;
 import com.cloud.boot.user.model.vo.UserAuthVO;
+import com.cloud.boot.user.model.vo.UserInfoVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,4 +17,7 @@ public interface UserFeignClient {
 
     @GetMapping("/username/{username}")
     R<UserAuthVO> getUserAuthInfoByUsername(@PathVariable("username") String username);
+
+    @GetMapping("/current")
+    R<UserInfoVO> getCurrentUserInfo();
 }

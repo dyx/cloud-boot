@@ -4,6 +4,7 @@ import com.cloud.boot.common.core.constant.enums.GlobalErrorCodeEnum;
 import com.cloud.boot.common.core.util.R;
 import com.cloud.boot.user.feign.UserFeignClient;
 import com.cloud.boot.user.model.vo.UserAuthVO;
+import com.cloud.boot.user.model.vo.UserInfoVO;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,6 +15,11 @@ public class UserFeignClientFallback implements UserFeignClient {
 
     @Override
     public R<UserAuthVO> getUserAuthInfoByUsername(String username) {
+        return R.fail(GlobalErrorCodeEnum.REST_SERVICE_UNAVAILABLE);
+    }
+
+    @Override
+    public R<UserInfoVO> getCurrentUserInfo() {
         return R.fail(GlobalErrorCodeEnum.REST_SERVICE_UNAVAILABLE);
     }
 }

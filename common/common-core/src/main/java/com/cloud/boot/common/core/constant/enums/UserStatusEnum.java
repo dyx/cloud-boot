@@ -2,12 +2,13 @@ package com.cloud.boot.common.core.constant.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @author lhd
  */
 @Getter
-@AllArgsConstructor
+@RequiredArgsConstructor
 public enum UserStatusEnum {
 
     ENABLED("1", "启用"),

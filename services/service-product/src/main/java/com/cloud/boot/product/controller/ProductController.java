@@ -1,7 +1,7 @@
 package com.cloud.boot.product.controller;
 
 import com.cloud.boot.product.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RequestMapping("product")
 @RestController
+@RequiredArgsConstructor
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 }
