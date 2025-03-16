@@ -6,7 +6,7 @@ import cn.dev33.satoken.router.SaHttpMethod;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import com.cloud.boot.common.core.constant.ServiceConfig;
-import com.cloud.boot.common.core.exception.BizException;
+import com.cloud.boot.common.core.exception.AuthException;
 import com.cloud.boot.gateway.handler.GlobalExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +41,7 @@ public class GatewayConfig {
                     SaRouter.match(SaHttpMethod.OPTIONS).back();
                 })
                 .setError(e -> {
-                    throw new BizException("认证失败：" + e.getMessage());
+                    throw new AuthException("认证失败：" + e.getMessage());
                 });
     }
 }

@@ -1,12 +1,14 @@
 package com.cloud.boot.gateway.handler;
 
 import com.cloud.boot.common.core.constant.enums.GlobalErrorCodeEnum;
+import com.cloud.boot.common.core.exception.AuthException;
 import com.cloud.boot.common.core.jackson.JacksonUtil;
 import com.cloud.boot.common.core.util.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.buffer.DataBufferFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.server.ServerWebExchange;
@@ -29,7 +31,9 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
 		}
 
 		response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
-
+		if (ex instanceof AuthException) {
+			response.setStatusCode(HttpStatus.UNAUTHORIZED);
+		}
 		return response.writeWith(Mono.fromSupplier(() -> {
 			DataBufferFactory bufferFactory = response.bufferFactory();
             log.debug("网关错误 : {} {}", exchange.getRequest().getPath(), ex.getMessage());
