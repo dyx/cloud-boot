@@ -16,10 +16,7 @@ import com.cloud.boot.user.model.dto.UpdateUserDTO;
 import com.cloud.boot.user.model.dto.UserListQuery;
 import com.cloud.boot.user.model.dto.UserPageQuery;
 import com.cloud.boot.user.model.entity.SysUserDO;
-import com.cloud.boot.user.model.vo.UserAuthVO;
-import com.cloud.boot.user.model.vo.UserDetailVO;
-import com.cloud.boot.user.model.vo.UserInfoVO;
-import com.cloud.boot.user.model.vo.UserListVO;
+import com.cloud.boot.user.model.vo.*;
 import com.cloud.boot.user.service.SysRoleMenuService;
 import com.cloud.boot.user.service.SysUserRoleService;
 import com.cloud.boot.user.service.SysUserService;
@@ -45,9 +42,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
         SysUserDO dataObj = getById(userId);
         List<Long> roleIdList = sysUserRoleService.getRoleIdListByUserId(userId);
         List<String> permissionList = sysRoleMenuService.getPermissonsByRoleIdList(roleIdList);
+        List<MenuTreeVO> menuList = sysRoleMenuService.getMenuTreeByRoleIdList(roleIdList);
 
         UserInfoVO userInfoVo = SysUserConverter.INSTANCE.do2UserInfoVo(dataObj);
         userInfoVo.setRoleIdList(roleIdList);
+        userInfoVo.setMenuList(menuList);
         userInfoVo.setPermissionList(permissionList);
         return userInfoVo;
     }

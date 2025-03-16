@@ -136,6 +136,10 @@ mvn clean install
 ## 部署
 
 ### 四、其他
+#### 前后端规约
+- id，传输类型统一为 `String` 类型
+  - 后端数据类型为 Long 类型，为防止前端精度丢失，会自动序列化为 String 类型，在反序列化时，会自动将 String 转换为 Long 类型
+- 时间，传输格式统一为 `yyyy-MM-dd HH:mm:ss`
 #### 命名规范
 - Service / Mapper
   - get[User]，获取单个对象
@@ -153,7 +157,7 @@ mvn clean install
   - 领域对象:操作，如 user:save、user:remove、user:update
 #### 使用规范
 - 依赖注入，推荐使用构造器注入，搭配 @RequiredArgsConstructor 注解使用
-  - ，搭配 @RequiredArgsConstructor 注解，该注解生成的构造参数为：仅 final 字段和未初始化的 @NonNull 字段
+  - @RequiredArgsConstructor 注解，该注解生成的构造参数为：仅 final 字段和未初始化的 @NonNull 字段
 ```java
 @Controller
 @RequiredArgsConstructor

@@ -13,6 +13,7 @@ public class UserInfoVO {
     private Long id;
     private String username;
     private String nickname;
-    private List<String> permissionList;
     private List<Long> roleIdList;
+    private List<MenuTreeVO> menuList;
+    private List<String> permissionList;
 }
