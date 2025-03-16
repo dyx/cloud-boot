@@ -68,6 +68,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
                 Wrappers.<SysUserDO>lambdaQuery()
                         .like(StrUtil.isNotBlank(query.getUsername()), SysUserDO::getUsername, query.getUsername())
                         .like(StrUtil.isNotBlank(query.getNickname()), SysUserDO::getNickname, query.getNickname())
+                        .like(StrUtil.isNotBlank(query.getEmail()), SysUserDO::getEmail, query.getEmail())
+                        .like(StrUtil.isNotBlank(query.getPhone()), SysUserDO::getPhone, query.getPhone())
                         .eq(StrUtil.isNotBlank(query.getStatus()), SysUserDO::getStatus, query.getStatus())
         );
         IPage<UserListVO> voPage = SysUserConverter.INSTANCE.doPage2VoPage(page);

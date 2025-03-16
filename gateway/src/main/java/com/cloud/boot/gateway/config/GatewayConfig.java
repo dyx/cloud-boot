@@ -7,7 +7,7 @@ import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import com.cloud.boot.common.core.constant.ServiceConfig;
 import com.cloud.boot.common.core.exception.AuthException;
-import com.cloud.boot.gateway.handler.GlobalExceptionHandler;
+import com.cloud.boot.gateway.handler.GlobalErrorWebExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,8 +18,8 @@ import org.springframework.context.annotation.Configuration;
 public class GatewayConfig {
 
     @Bean
-    public GlobalExceptionHandler globalExceptionHandler() {
-        return new GlobalExceptionHandler();
+    public GlobalErrorWebExceptionHandler globalExceptionHandler() {
+        return new GlobalErrorWebExceptionHandler();
     }
 
     @Bean

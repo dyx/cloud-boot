@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.nio.file.AccessDeniedException;
 import java.sql.DataTruncation;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author lhd
@@ -30,6 +32,8 @@ import java.sql.SQLException;
 public class GlobalExceptionHandler {
 
     private static final int SQL_ERROR_CODE_NO_DEFAULT_VALUE = 1364;
+    static final Pattern DUPLICATE_KEY_PATTERN = Pattern.compile("Duplicate entry '([^-]+?)-(\\d+)'");
+
 
     /**
      * 参数校验异常
@@ -145,7 +149,13 @@ public class GlobalExceptionHandler {
         log.error("数据库异常，原因：{}", e.getMessage());
 
         if (e instanceof DuplicateKeyException) {
-            return R.fail(GlobalErrorCodeEnum.DB_DATA_DUPLICATE_KEY);
+            Matcher matcher = DUPLICATE_KEY_PATTERN.matcher(e.getCause().getMessage());
+            String duplicateValue = "";
+            if (matcher.find()) {
+                duplicateValue = matcher.group(1);
+            }
+            return R.fail(GlobalErrorCodeEnum.DB_DATA_DUPLICATE_KEY.getCode(),
+                    String.format("%s：%s", GlobalErrorCodeEnum.DB_DATA_DUPLICATE_KEY.getMsg(), duplicateValue));
         }
 
         if (e.getCause() instanceof DataTruncation) {

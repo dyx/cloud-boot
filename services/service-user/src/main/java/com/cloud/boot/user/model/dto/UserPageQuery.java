@@ -18,6 +18,12 @@ public class UserPageQuery extends BasePageQuery {
     @Schema(description = "用户昵称")
     private String nickname;
 
+    @Schema(description = "邮箱")
+    private String email;
+
+    @Schema(description = "手机号")
+    private String phone;
+
     @Schema(description = "用户状态")
     private String status;
 }
