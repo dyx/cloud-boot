@@ -15,8 +15,6 @@ public class JacksonConfig {
     @Bean
     @ConditionalOnMissingBean
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
-        return builder -> {
-            builder.modules(new CustomSimpleModule());
-        };
+        return builder -> builder.modules(new CustomSimpleModule());
     }
 }

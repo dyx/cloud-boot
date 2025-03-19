@@ -13,6 +13,10 @@ public class JacksonUtil {
     }
 
     public static String toJsonStr(Object obj) {
+        if (obj == null) {
+            return null;
+        }
+
         try {
             return OBJECT_MAPPER.writeValueAsString(obj);
         }
@@ -23,6 +27,9 @@ public class JacksonUtil {
     }
 
     public static byte[] toJsonBytes(Object obj) {
+        if (obj == null) {
+            return null;
+        }
         try {
             return OBJECT_MAPPER.writeValueAsBytes(obj);
         }

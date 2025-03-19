@@ -18,6 +18,10 @@ public class UpdateUserDTO {
     @Schema(description = "用户昵称")
     private String nickname;
 
+    @NotBlank
+    @Schema(description = "姓名")
+    private String name;
+
     @Schema(description = "用户邮箱")
     private String email;
 

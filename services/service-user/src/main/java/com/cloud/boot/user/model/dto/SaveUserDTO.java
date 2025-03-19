@@ -19,6 +19,10 @@ public class SaveUserDTO {
     private String password;
 
     @NotBlank
+    @Schema(description = "姓名")
+    private String name;
+
+    @NotBlank
     @Schema(description = "用户昵称")
     private String nickname;
 

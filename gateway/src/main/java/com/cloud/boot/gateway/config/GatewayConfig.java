@@ -29,9 +29,7 @@ public class GatewayConfig {
                 .addExclude("/webjars/**", "/v3/api-docs/**", "/doc.html", "/swagger-ui.html", "/swagger-ui/**", "/swagger-resources", "/favicon.ico")
                 .addExclude(ServiceConfig.SERVICES.stream().map(serviceInfo -> serviceInfo.contextPath() + "/v3/api-docs/**").toArray(String[]::new))
                 .addExclude("/auth/login")
-                .setAuth(obj -> {
-                    SaRouter.match("/**", r -> StpUtil.checkLogin());
-                })
+                .setAuth(obj -> SaRouter.match("/**", r -> StpUtil.checkLogin()))
                 .setBeforeAuth(obj -> {
                     SaHolder.getResponse()
                             .setHeader("Access-Control-Allow-Origin", "*")

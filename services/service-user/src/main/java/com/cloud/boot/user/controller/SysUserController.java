@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author lhd
@@ -47,6 +49,13 @@ public class SysUserController {
     @GetMapping("/username/{username}")
     public R<UserAuthVO> getUserAuthInfoByUsername(@PathVariable("username") String username) {
         return R.ok(sysUserService.getUserAuthInfoByUsername(username));
+    }
+
+    @Inner
+    @Operation(summary = "批量翻译用户信息")
+    @PostMapping("/translate/batch")
+    public R<Map<Long, Map<String, Object>>> batchTranslateUser(@RequestBody Set<Long> sourceValueSet) {
+        return R.ok(sysUserService.batchTranslateUser(sourceValueSet));
     }
 
     @Operation(summary = "获取当前用户信息")

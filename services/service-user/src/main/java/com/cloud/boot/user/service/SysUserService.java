@@ -11,6 +11,8 @@ import com.cloud.boot.user.model.vo.UserInfoVO;
 import com.cloud.boot.user.model.vo.UserListVO;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author lhd
@@ -26,6 +28,8 @@ public interface SysUserService {
     List<UserListVO> listUsers(UserListQuery query);
 
     UserDetailVO getUserById(Long id);
+
+    Map<Long, Map<String, Object>> batchTranslateUser(Set<Long> sourceValueSet);
 
     void saveUser(SaveUserDTO dto);
 

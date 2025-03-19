@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * @author lhd
  */
-@FeignClient(value = ServiceConfig.User.ID, path = "/user", fallback = UserFeignClientFallback.class)
+@FeignClient(value = ServiceConfig.User.ID, contextId = "userFeignClient", path = "/user", fallback = UserFeignClientFallback.class)
 public interface UserFeignClient {
 
     @GetMapping("/username/{username}")

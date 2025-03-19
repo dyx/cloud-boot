@@ -1,6 +1,7 @@
 package com.cloud.boot.user.service.impl;
 
 import cn.dev33.satoken.secure.BCrypt;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -9,6 +10,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cloud.boot.common.core.constant.enums.UserStatusEnum;
 import com.cloud.boot.common.core.exception.BizException;
 import com.cloud.boot.common.resource.server.util.UserUtil;
+import com.cloud.boot.common.translation.annotaion.EnableTranslation;
+import com.cloud.boot.common.translation.annotaion.TranslateMappingKeyConstant;
 import com.cloud.boot.user.mapper.SysUserMapper;
 import com.cloud.boot.user.model.converter.SysUserConverter;
 import com.cloud.boot.user.model.dto.SaveUserDTO;
@@ -23,7 +26,7 @@ import com.cloud.boot.user.service.SysUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * @author lhd
@@ -61,6 +64,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
         return SysUserConverter.INSTANCE.do2UserAuthVo(dataObj);
     }
 
+    @EnableTranslation
     @Override
     public IPage<UserListVO> getUserPage(UserPageQuery query) {
 
@@ -76,6 +80,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
         return voPage;
     }
 
+    @EnableTranslation
     @Override
     public List<UserListVO> listUsers(UserListQuery query) {
         List<SysUserDO> list = list(new Page<>(1, 100),
@@ -88,10 +93,33 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
         return voList;
     }
 
+    @EnableTranslation
     @Override
     public UserDetailVO getUserById(Long id) {
         UserDetailVO vo = SysUserConverter.INSTANCE.do2detailVo(getById(id));
         return vo;
+    }
+
+    @Override
+    public Map<Long, Map<String, Object>> batchTranslateUser(Set<Long> sourceValueSet) {
+
+        Map<Long, Map<String, Object>> resultMap = new HashMap<>();
+        if (CollUtil.isEmpty(sourceValueSet)) {
+            return resultMap;
+        }
+
+        List<SysUserDO> doList = list(Wrappers.<SysUserDO>lambdaQuery().in(SysUserDO::getId, sourceValueSet));
+        for (SysUserDO dataObj : doList) {
+            Map<String, Object> map = new HashMap<>();
+            map.put(TranslateMappingKeyConstant.USER_NAME, dataObj.getName());
+            map.put(TranslateMappingKeyConstant.USER_USERNAME, dataObj.getUsername());
+            map.put(TranslateMappingKeyConstant.USER_NICKNAME, dataObj.getNickname());
+            map.put(TranslateMappingKeyConstant.USER_PHONE, dataObj.getPhone());
+            map.put(TranslateMappingKeyConstant.USER_EMAIL, dataObj.getEmail());
+            resultMap.put(dataObj.getId(), map);
+        }
+
+        return resultMap;
     }
 
     @Override

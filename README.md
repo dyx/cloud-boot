@@ -136,6 +136,8 @@ mvn clean install
 ## 部署
 
 ### 四、其他
+#### 文档
+- [相关注解和功能说明](0_doc/Usage.md)
 #### 前后端规约
 - id，传输类型统一为 `String` 类型
   - 后端数据类型为 Long 类型，为防止前端精度丢失，会自动序列化为 String 类型，在反序列化时，会自动将 String 转换为 Long 类型

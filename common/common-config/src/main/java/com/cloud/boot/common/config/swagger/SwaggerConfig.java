@@ -18,7 +18,7 @@ public class SwaggerConfig {
     private final SwapperProperties swapperProperties;
 
     @Bean
-    public OpenAPI customOpenAPI() {
+    public OpenAPI customOpenApi() {
         return new OpenAPI()
                 .info(new Info()
                         .title(swapperProperties.getTitle())

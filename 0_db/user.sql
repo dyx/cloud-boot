@@ -73,15 +73,17 @@ create table sys_role_menu
 )
     comment '角色菜单权限';
 
-create table sys_user
+create table user.sys_user
 (
     id          bigint auto_increment comment '主键ID'
         primary key,
     username    varchar(50)  default ''      not null comment '用户名',
     password    varchar(255) default ''      not null comment '用户密码',
-    nickname    varchar(100) default ''      null comment '用户昵称',
+    name        varchar(32)  default ''      not null,
+    nickname    varchar(64)  default ''      not null comment '用户昵称',
+    avatar      varchar(255) default ''      not null,
     email       varchar(100) default ''      not null comment '用户邮箱',
-    phone       varchar(20)  default ''      null comment '手机号',
+    phone       varchar(20)  default ''      not null comment '手机号',
     status      char         default '1'     null comment '用户状态 1启用 2停用',
     create_by   bigint       default 0       not null comment '创建人',
     create_time datetime     default (now()) null comment '创建时间',
@@ -93,7 +95,7 @@ create table sys_user
 )
     comment '用户';
 
-INSERT INTO sys_user (id, username, password, nickname, email, phone, status, create_by, create_time, update_by, update_time, delete_time) VALUES (1, 'admin', '$2a$10$3eBNm9Gr7tStgkuVzEzamO7GGKvax/s4tfUc4IKF.qmt/XkVhceI.', '管理员', 'admin@cloud.com', '18812345678', '1', 0, '2025-02-17 13:13:25', 0, '2025-03-11 10:24:34', 0);
+INSERT INTO sys_user (id, username, password, name, nickname, avatar, email, phone, status, create_by, create_time, update_by, update_time, delete_time) VALUES (1, 'admin', '$2a$10$3eBNm9Gr7tStgkuVzEzamO7GGKvax/s4tfUc4IKF.qmt/XkVhceI.', '管理员', '管理员', '', 'admin@cloud.com', '18812345678', '1', 0, '2025-02-17 13:13:25', 0, '2025-03-18 11:36:16', 0);
 
 create table sys_user_role
 (
