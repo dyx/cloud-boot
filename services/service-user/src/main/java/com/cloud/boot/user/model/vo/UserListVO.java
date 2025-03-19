@@ -1,9 +1,7 @@
 package com.cloud.boot.user.model.vo;
 
-import com.cloud.boot.common.translation.annotaion.TranslateMapping;
-import com.cloud.boot.common.translation.annotaion.TranslateMappingKeyConstant;
 import com.cloud.boot.common.translation.annotaion.Translate;
-import com.cloud.boot.common.translation.annotaion.TranslatorTypeEnum;
+import com.cloud.boot.common.translation.annotaion.TranslatorTypeConstant;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -28,20 +26,7 @@ public class UserListVO {
     @Schema(description = "手机号")
     private String phone;
 
-    @Translate(type = TranslatorTypeEnum.DICT, dictCode = "user_status")
+    @Translate(type = TranslatorTypeConstant.DICT, dictCode = "user_status")
     private String status;
     private String statusName;
-
-    @Translate(type = TranslatorTypeEnum.USER, target = {
-            @TranslateMapping(mappingKey = TranslateMappingKeyConstant.USER_NICKNAME, target = "createByName"),
-            @TranslateMapping(mappingKey = TranslateMappingKeyConstant.USER_USERNAME, target = "createByUsername"),
-            @TranslateMapping(mappingKey = TranslateMappingKeyConstant.USER_PHONE, target = "phone")
-    })
-    private Long createBy;
-    private String createByName;
-    private String createByUsername;
-
-    @Translate(type = TranslatorTypeEnum.USER, target = @TranslateMapping(mappingKey = TranslateMappingKeyConstant.USER_NICKNAME, target = "updateByName"))
-    private Long updateBy;
-    private String updateByName;
 }

@@ -1,8 +1,6 @@
 package com.cloud.boot.common.translation.translator;
 
 
-import com.cloud.boot.common.translation.annotaion.TranslatorTypeEnum;
-
 import java.util.Map;
 import java.util.Set;
 
@@ -12,5 +10,5 @@ import java.util.Set;
 public interface Translator<T> {
 
     Map<T, Map<String, Object>> translate(Set<T> sourceValueSet);
-    TranslatorTypeEnum getType();
+    String getType();
 }

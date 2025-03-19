@@ -5,6 +5,16 @@
 
 使用 @Inner 注解时，判断请求头中 Inner 属性，true 则放行，false 则拒绝。
 ### 使用
+引入依赖
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.cloud.boot</groupId>
+        <artifactId>common-feign</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+```
 在 Controller 方法上增加 @Inner 注解
 ```java
 @Inner
@@ -14,21 +24,33 @@ public R<UserAuthVO> getUserAuthInfoByUsername(@PathVariable("username") String 
 }
 ```
 ## @Sensitive 脱敏注解
+引入依赖
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.cloud.boot</groupId>
+        <artifactId>common-mybatis</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+```
 
-## 翻译工具
+## @Translate 字段翻译注解
 ### 使用
 1. 引入依赖
 ```xml
-<dependency>
-    <groupId>com.cloud.boot</groupId>
-    <artifactId>common-translation-annotation</artifactId>
-    <version>1.0-SNAPSHOT</version>
-</dependency>
-<dependency>
-    <groupId>com.cloud.boot</groupId>
-    <artifactId>common-translation-core</artifactId>
-    <version>1.0-SNAPSHOT</version>
-</dependency>
+<dependencies>
+    <dependency>
+        <groupId>com.cloud.boot</groupId>
+        <artifactId>common-translation-annotation</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+        <groupId>com.cloud.boot</groupId>
+        <artifactId>common-translation-core</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+</dependencies>
 ```
 2. 在需要翻译的字段上增加`@Translate`注解
 ```java
@@ -49,7 +71,7 @@ private String createByUsername;
 @EnableTranslation
 @Override
 public IPage<UserListVO> getUserPage(UserPageQuery query) {
-    ...
+    // ...
 }
 ```
 ### 高级
@@ -64,8 +86,8 @@ public class CustomTranslator implements Translator<String> {
     }
 
     @Override
-    public TranslatorTypeEnum getType() {
-        return TranslatorTypeEnum.CUSTOM;
+    public String getType() {
+        return TranslatorTypeConstant.CUSTOM;
     }
 }
 ```

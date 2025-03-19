@@ -16,6 +16,9 @@ create table sys_dict
 )
     comment '字典';
 
+INSERT INTO sys_dict (id, dict_type_id, code, value, label, order_num, description, create_by, create_time, update_by, update_time, delete_time) VALUES (1, 1, 'user_status', '1', '启用', 0, null, 1, '2025-03-19 10:55:57', 0, '2025-03-19 12:14:33', 0);
+INSERT INTO sys_dict (id, dict_type_id, code, value, label, order_num, description, create_by, create_time, update_by, update_time, delete_time) VALUES (2, 1, 'user_status', '2', '停用', 0, null, 1, '2025-03-19 10:56:13', 0, '2025-03-19 12:14:33', 0);
+
 create table sys_dict_type
 (
     id          bigint auto_increment comment '主键ID'
@@ -73,7 +76,7 @@ create table sys_role_menu
 )
     comment '角色菜单权限';
 
-create table user.sys_user
+create table sys_user
 (
     id          bigint auto_increment comment '主键ID'
         primary key,

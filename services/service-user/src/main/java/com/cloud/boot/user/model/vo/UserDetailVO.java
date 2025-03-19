@@ -1,8 +1,7 @@
 package com.cloud.boot.user.model.vo;
 
 
-import com.cloud.boot.common.translation.annotaion.Translate;
-import com.cloud.boot.common.translation.annotaion.TranslatorTypeEnum;
+import com.cloud.boot.common.translation.annotaion.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -24,10 +23,23 @@ public class UserDetailVO {
     @Schema(description = "手机号")
     private String phone;
 
-    @Translate(type = TranslatorTypeEnum.DICT, dictCode = "user_status")
+    @Translate(type = TranslatorTypeConstant.DICT, dictCode = "user_status")
     @Schema(description = "用户状态")
     private String status;
-
     @Schema(description = "用户状态名称")
     private String statusName;
+
+    @Translate(type = TranslatorTypeConstant.USER,
+            target = @TranslateMapping(mappingKey = TranslateMappingKeyConstant.USER_NAME, target = "createByName"))
+    @Schema(description = "创建人")
+    private Long createBy;
+    @Schema(description = "创建人名称")
+    private String createByName;
+
+    @Translate(type = TranslatorTypeConstant.USER,
+            target = @TranslateMapping(mappingKey = TranslateMappingKeyConstant.USER_NAME, target = "updateByName"))
+    @Schema(description = "修改人")
+    private Long updateBy;
+    @Schema(description = "修改人名称")
+    private String updateByName;
 }

@@ -4,9 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ReflectUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.cloud.boot.common.translation.annotaion.TranslateMapping;
-import com.cloud.boot.common.translation.annotaion.Translate;
-import com.cloud.boot.common.translation.annotaion.TranslatorTypeEnum;
+import com.cloud.boot.common.translation.annotaion.*;
 import com.cloud.boot.common.translation.metadata.TargetField;
 import com.cloud.boot.common.translation.translator.Translator;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -23,7 +21,7 @@ import java.util.stream.Collectors;
 @Aspect
 public class TranslationAspect {
 
-    private final Map<TranslatorTypeEnum, Translator<?>> translatorMap;
+    private final Map<String, Translator<?>> translatorMap;
 
     public TranslationAspect(List<Translator<?>> translators) {
         this.translatorMap = translators.stream()
@@ -34,16 +32,18 @@ public class TranslationAspect {
     public Object doTranslation(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result = joinPoint.proceed();
 
+        if (result == null) {
+            return result;
+        }
+
         if (result instanceof List<?> list) {
             processList(list);
         }
-        // todo 待测试
         else if (result instanceof IPage<?> page) {
             processList(page.getRecords());
         }
-        else if (result instanceof Map<?,?> map) {
-        }
-        else if (result instanceof Arrays arrays) {
+        else if (result instanceof Map || result.getClass().isArray()) {
+            return result;
         }
         else {
             processSingle(result);
@@ -63,7 +63,7 @@ public class TranslationAspect {
         }
 
         // 按照翻译类型合并 sourceValue，确保每种类型只请求一次
-        Map<TranslatorTypeEnum, Set<?>> sourceValueMap = new HashMap<>();
+        Map<String, Set<?>> sourceValueMap = new HashMap<>();
         List<TargetField> targetFiledList = new ArrayList<>();
         collectParams(entryList, sourceValueMap, targetFiledList);
 
@@ -76,16 +76,16 @@ public class TranslationAspect {
     }
 
     @SuppressWarnings("unchecked")
-    private <T> void collectParams(List<?> entryList, Map<TranslatorTypeEnum, Set<?>> sourceValueMap, List<TargetField> targetFiledList) {
+    private <T> void collectParams(List<?> entryList, Map<String, Set<?>> sourceValueMap, List<TargetField> targetFiledList) {
 
         for (Field field : entryList.get(0).getClass().getDeclaredFields()) {
             if (field.isAnnotationPresent(Translate.class)) {
 
                 Translate translateAnnotation = field.getAnnotation(Translate.class);
-                TranslatorTypeEnum translatorType = translateAnnotation.type();
+                String translatorType = translateAnnotation.type();
 
                 Set<T> sourceValueSet = (Set<T>) sourceValueMap.computeIfAbsent(translatorType, k -> new HashSet<>());
-                if (TranslatorTypeEnum.DICT == translatorType) {
+                if (TranslatorTypeConstant.DICT.equals(translatorType)) {
                     String dictCode = translateAnnotation.dictCode();
                     // DICT类型，sourceValue为dict_code，其他类型为主键id
                     sourceValueSet.add((T) dictCode);
@@ -106,12 +106,12 @@ public class TranslationAspect {
     }
 
     @SuppressWarnings("unchecked")
-    private <T> Map<String, Map<String, Object>> getTargetValue(Map<TranslatorTypeEnum, Set<?>> sourceValueMap) {
+    private <T> Map<String, Map<String, Object>> getTargetValue(Map<String, Set<?>> sourceValueMap) {
 
         Map<String, Map<String, Object>> targetValueMap = new HashMap<>();
-        for (Map.Entry<TranslatorTypeEnum, Set<?>> sourceEntry : sourceValueMap.entrySet()) {
+        for (Map.Entry<String, Set<?>> sourceEntry : sourceValueMap.entrySet()) {
 
-            TranslatorTypeEnum translatorType = sourceEntry.getKey();
+            String translatorType = sourceEntry.getKey();
             Translator<T> translator = (Translator<T>) translatorMap.get(translatorType);
             if (translator == null) {
                 continue;
@@ -138,7 +138,7 @@ public class TranslationAspect {
             for (TargetField targetField : targetFiledList) {
 
                 T sourceValue = (T) ReflectUtil.getFieldValue(entry, targetField.getSourceField());
-                if (TranslatorTypeEnum.DICT.equals(targetField.getTranslatorType())) {
+                if (TranslatorTypeConstant.DICT.equals(targetField.getTranslatorType())) {
                     Map<String, Object> map = targetValueMap.get(getTargetValueMapKey(targetField.getTranslatorType(), targetField.getDictCode()));
                     if (map == null) {
                         continue;
@@ -160,7 +160,7 @@ public class TranslationAspect {
         }
     }
 
-    private String getTargetValueMapKey(TranslatorTypeEnum translatorType, Object sourceValue) {
+    private String getTargetValueMapKey(String translatorType, Object sourceValue) {
         return String.format(String.format("%s:%s", translatorType, Convert.toStr(sourceValue)));
     }
 }

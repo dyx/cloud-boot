@@ -76,8 +76,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
                         .like(StrUtil.isNotBlank(query.getPhone()), SysUserDO::getPhone, query.getPhone())
                         .eq(StrUtil.isNotBlank(query.getStatus()), SysUserDO::getStatus, query.getStatus())
         );
-        IPage<UserListVO> voPage = SysUserConverter.INSTANCE.doPage2VoPage(page);
-        return voPage;
+        return SysUserConverter.INSTANCE.doPage2VoPage(page);
     }
 
     @EnableTranslation
@@ -89,15 +88,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
                         .like(StrUtil.isNotBlank(query.getNickname()), SysUserDO::getNickname, query.getNickname())
                         .eq(SysUserDO::getStatus, UserStatusEnum.ENABLED.getValue())
         );
-        List<UserListVO> voList = SysUserConverter.INSTANCE.doList2VoList(list);
-        return voList;
+        return SysUserConverter.INSTANCE.doList2VoList(list);
     }
 
     @EnableTranslation
     @Override
     public UserDetailVO getUserById(Long id) {
-        UserDetailVO vo = SysUserConverter.INSTANCE.do2detailVo(getById(id));
-        return vo;
+        return SysUserConverter.INSTANCE.do2detailVo(getById(id));
     }
 
     @Override

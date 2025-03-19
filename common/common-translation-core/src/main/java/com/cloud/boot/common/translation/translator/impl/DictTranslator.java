@@ -1,7 +1,7 @@
 package com.cloud.boot.common.translation.translator.impl;
 
 import com.cloud.boot.common.core.util.RHandler;
-import com.cloud.boot.common.translation.annotaion.TranslatorTypeEnum;
+import com.cloud.boot.common.translation.annotaion.TranslatorTypeConstant;
 import com.cloud.boot.common.translation.feign.UserServiceFeignClient;
 import com.cloud.boot.common.translation.translator.Translator;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class DictTranslator implements Translator<String> {
     }
 
     @Override
-    public TranslatorTypeEnum getType() {
-        return TranslatorTypeEnum.DICT;
+    public String getType() {
+        return TranslatorTypeConstant.DICT;
     }
 }
