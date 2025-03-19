@@ -81,6 +81,8 @@ mybatis-plus:
 
 knife4j:
   enable: true
+springdoc:
+  default-flat-param-object: true
 
 custom:
   logfile:

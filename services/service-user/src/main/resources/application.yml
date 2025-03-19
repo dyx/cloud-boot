@@ -93,6 +93,8 @@ sa-token:
 
 knife4j:
   enable: true
+springdoc:
+    default-flat-param-object: true
 
 logging:
   level:
