@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerIntercep
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.cloud.boot.common.mybatis.config.MybatisPlusMetaObjectHandler;
+import com.cloud.boot.common.mybatis.interceptor.SensitiveInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,6 +16,11 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration(proxyBeanMethods = false)
 public class MybatisAutoConfiguration {
+
+    @Bean
+    public Interceptor sensitiveInterceptor() {
+        return new SensitiveInterceptor();
+    }
 
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {

@@ -1,7 +1,9 @@
 package com.cloud.boot.user.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.cloud.boot.common.mybatis.annotation.Sensitive;
 import com.cloud.boot.common.mybatis.base.BaseDO;
+import com.cloud.boot.common.mybatis.constant.SensitiveStrategy;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -41,11 +43,13 @@ public class SysUserDO extends BaseDO {
     /**
      * 用户邮箱
      */
+    @Sensitive(strategy = SensitiveStrategy.EMAIL)
     private String email;
 
     /**
      * 手机号
      */
+    @Sensitive(strategy = SensitiveStrategy.PHONE)
     private String phone;
 
     /**

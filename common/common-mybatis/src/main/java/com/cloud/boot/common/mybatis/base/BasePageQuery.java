@@ -12,9 +12,9 @@ public class BasePageQuery {
 
     @NotNull
     @Schema(description = "当前页数")
-    private Integer current;
+    private Long current;
 
     @NotNull
     @Schema(description = "每页记录数")
-    private Integer size;
+    private Long size;
 }
