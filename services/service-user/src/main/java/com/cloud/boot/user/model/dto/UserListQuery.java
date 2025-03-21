@@ -12,6 +12,9 @@ public class UserListQuery {
     @Schema(description = "用户名")
     private String username;
 
+    @Schema(description = "用户姓名")
+    private String name;
+
     @Schema(description = "用户昵称")
     private String nickname;
 }

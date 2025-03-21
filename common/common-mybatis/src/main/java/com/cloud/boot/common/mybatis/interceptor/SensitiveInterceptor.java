@@ -32,20 +32,21 @@ public class SensitiveInterceptor implements Interceptor {
     }
 
     private void processSensitiveFields(Object item) {
-        if (item == null) return;
+        if (item == null) {
+            return;
+        }
         Class<?> clazz = item.getClass();
         for (Field field : clazz.getDeclaredFields()) {
-            Sensitive sensitive = field.getAnnotation(Sensitive.class);
-            if (sensitive != null && field.getType() == String.class) {
-                try {
-                    field.setAccessible(true);
-                    String originalValue = (String) field.get(item);
-                    if (originalValue != null) {
-                        String desensitizedValue = SensitiveUtils.desensitize(originalValue, sensitive.strategy());
+            if (field.isAnnotationPresent(Sensitive.class)) {
+                Sensitive sensitive = field.getAnnotation(Sensitive.class);
+                if (field.getType() == String.class) {
+                    try {
+                        field.setAccessible(true);
+                        String desensitizedValue = SensitiveUtils.desensitize((String) field.get(item), sensitive.strategy());
                         field.set(item, desensitizedValue);
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException("脱敏处理失败", e);
                     }
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException("脱敏处理失败", e);
                 }
             }
         }

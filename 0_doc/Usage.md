@@ -34,6 +34,28 @@ public R<UserAuthVO> getUserAuthInfoByUsername(@PathVariable("username") String 
     </dependency>
 </dependencies>
 ```
+在 DO 上的字段增加`@Sensitive`注解并设置策略
+```java
+@TableName("sys_user")
+@Data
+public class SysUserDO {
+
+    /**
+     * 用户邮箱
+     */
+    @Sensitive(strategy = SensitiveStrategy.EMAIL)
+    private String email;
+
+    /**
+     * 手机号
+     */
+    @Sensitive(strategy = SensitiveStrategy.PHONE)
+    private String phone;
+}
+```
+### 注意
+1.目前只支持List、单个实体的查询结果
+2.暂不支持层级嵌套实体
 
 ## @Translate 字段翻译注解
 ### 使用

@@ -17,6 +17,9 @@ public class UserListVO {
     @Schema(description = "用户名")
     private String username;
 
+    @Schema(description = "姓名")
+    private String name;
+
     @Schema(description = "用户昵称")
     private String nickname;
 

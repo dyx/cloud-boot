@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cloud.boot.common.core.constant.enums.UserStatusEnum;
 import com.cloud.boot.common.core.exception.BizException;
+import com.cloud.boot.common.mybatis.util.PageUtils;
 import com.cloud.boot.common.resource.server.util.UserUtil;
 import com.cloud.boot.common.translation.annotaion.EnableTranslation;
 import com.cloud.boot.common.translation.annotaion.TranslateMappingKeyConstant;
@@ -26,7 +27,10 @@ import com.cloud.boot.user.service.SysUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author lhd
@@ -68,7 +72,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
     @Override
     public IPage<UserListVO> getUserPage(UserPageQuery query) {
 
-        IPage<SysUserDO> page = page(new Page<>(query.getCurrent(), query.getSize()),
+        IPage<SysUserDO> page = page(PageUtils.fillPage(query),
                 Wrappers.<SysUserDO>lambdaQuery()
                         .like(StrUtil.isNotBlank(query.getUsername()), SysUserDO::getUsername, query.getUsername())
                         .like(StrUtil.isNotBlank(query.getNickname()), SysUserDO::getNickname, query.getNickname())
