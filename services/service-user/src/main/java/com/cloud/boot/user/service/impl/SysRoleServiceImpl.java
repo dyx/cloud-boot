@@ -16,8 +16,12 @@ import com.cloud.boot.user.model.dto.SaveRoleDTO;
 import com.cloud.boot.user.model.entity.SysRoleDO;
 import com.cloud.boot.user.model.vo.RoleDetailVO;
 import com.cloud.boot.user.model.vo.RoleListVO;
+import com.cloud.boot.user.service.SysRoleMenuService;
 import com.cloud.boot.user.service.SysRoleService;
+import com.cloud.boot.user.service.SysUserRoleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,7 +29,11 @@ import java.util.List;
  * @author lhd
  */
 @Service
+@RequiredArgsConstructor
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleDO> implements SysRoleService {
+
+    private final SysUserRoleService sysUserRoleService;
+    private final SysRoleMenuService sysRoleMenuService;
 
     @Override
     public IPage<RoleListVO> getRolePage(RolePageQuery query) {
@@ -64,6 +72,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleDO> im
         updateById(dataObj);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void removeRoleById(Long id) {
         SysRoleDO dataObj = getById(id);
@@ -73,6 +82,13 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleDO> im
         if (dataObj.getPreset()) {
             throw new BizException("预置数据不可删除");
         }
+        // 该角色已分配给 [N] 个用户，请先解除分配
+        Long userCount = sysUserRoleService.countUserByRoleId(id);
+        if (userCount != null && userCount > 0) {
+            throw new BizException(String.format("该角色已分配给 [%s] 个用户，请先解除分配", userCount));
+        }
+
+        sysRoleMenuService.removeRoleMenuByRoleId(id);
         removeById(id);
     }
 }

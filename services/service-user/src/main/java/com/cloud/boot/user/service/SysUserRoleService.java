@@ -8,4 +8,6 @@ import java.util.List;
 public interface SysUserRoleService {
 
     List<Long> getRoleIdListByUserId(Long userId);
+
+    Long countUserByRoleId(Long roleId);
 }

@@ -22,4 +22,9 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUerRoleMapper, SysUse
         }
         return list(Wrappers.<SysUserRoleDO>lambdaQuery().eq(SysUserRoleDO::getUserId, userId)).stream().map(SysUserRoleDO::getRoleId).toList();
     }
+
+    @Override
+    public Long countUserByRoleId(Long roleId) {
+        return count(Wrappers.<SysUserRoleDO>lambdaQuery().eq(SysUserRoleDO::getRoleId, roleId));
+    }
 }

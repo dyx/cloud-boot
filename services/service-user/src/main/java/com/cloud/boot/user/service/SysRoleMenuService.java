@@ -12,4 +12,6 @@ public interface SysRoleMenuService {
     List<MenuTreeVO> getMenuTreeByRoleIdList(List<Long> roleIdList);
 
     List<String> getPermissonsByRoleIdList(List<Long> roleIdList);
+
+    void removeRoleMenuByRoleId(Long roleId);
 }

@@ -1,6 +1,7 @@
 package com.cloud.boot.user.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cloud.boot.user.mapper.SysRoleMenuMapper;
 import com.cloud.boot.user.model.converter.SysMenuConverter;
@@ -33,6 +34,15 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
             return List.of();
         }
         return baseMapper.getPermissionByRoleIdList(roleIdList);
+    }
+
+    @Override
+    public void removeRoleMenuByRoleId(Long roleId) {
+        if (roleId == null) {
+            return;
+        }
+
+        remove(Wrappers.<SysRoleMenuDO>lambdaUpdate().eq(SysRoleMenuDO::getRoleId, roleId));
     }
 
     private List<MenuTreeVO> buildMenuTree(Long parentId, List<MenuTreeVO> sourceList) {
