@@ -63,7 +63,8 @@ create table sys_role
     create_time datetime    default CURRENT_TIMESTAMP null comment '创建时间',
     update_by   bigint      default 0                 not null comment '修改人',
     update_time datetime                              null on update CURRENT_TIMESTAMP comment '修改时间',
-    delete_time bigint      default 0                 not null comment '删除时间'
+    delete_time bigint      default 0                 not null comment '删除时间',
+    is_preset   tinyint     default 0                 not null comment '是否预置数据'
 )
     comment '角色';
 
@@ -93,12 +94,13 @@ create table sys_user
     update_by   bigint       default 0       not null comment '修改人',
     update_time datetime                     null on update CURRENT_TIMESTAMP comment '修改时间',
     delete_time bigint       default 0       not null comment '删除时间',
+    is_preset   tinyint      default 0       not null comment '是否预置数据',
     constraint uk_username_delete_time
         unique (username, delete_time)
 )
     comment '用户';
 
-INSERT INTO sys_user (id, username, password, name, nickname, avatar, email, phone, status, create_by, create_time, update_by, update_time, delete_time) VALUES (1, 'admin', '$2a$10$3eBNm9Gr7tStgkuVzEzamO7GGKvax/s4tfUc4IKF.qmt/XkVhceI.', '管理员', '管理员', '', 'admin@cloud.com', '18812345678', '1', 0, '2025-02-17 13:13:25', 0, '2025-03-18 11:36:16', 0);
+INSERT INTO sys_user (id, username, password, name, nickname, avatar, email, phone, status, create_by, create_time, update_by, update_time, delete_time, is_preset) VALUES (1, 'admin', '$2a$10$3eBNm9Gr7tStgkuVzEzamO7GGKvax/s4tfUc4IKF.qmt/XkVhceI.', '管理员', '管理员', '', 'admin@cloud.com', '18812345678', '1', 0, '2025-02-17 13:13:25', 0, '2025-03-18 11:36:16', 0, 1);
 
 create table sys_user_role
 (

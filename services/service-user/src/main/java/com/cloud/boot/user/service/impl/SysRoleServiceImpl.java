@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cloud.boot.common.core.exception.BizException;
 import com.cloud.boot.common.mybatis.util.PageUtils;
 import com.cloud.boot.common.translation.annotaion.EnableTranslation;
 import com.cloud.boot.user.mapper.SysRoleMapper;
@@ -65,6 +66,13 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRoleDO> im
 
     @Override
     public void removeRoleById(Long id) {
+        SysRoleDO dataObj = getById(id);
+        if (dataObj == null) {
+            return;
+        }
+        if (dataObj.getPreset()) {
+            throw new BizException("预置数据不可删除");
+        }
         removeById(id);
     }
 }

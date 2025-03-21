@@ -1,5 +1,6 @@
 package com.cloud.boot.user.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.cloud.boot.common.mybatis.annotation.Sensitive;
 import com.cloud.boot.common.mybatis.base.BaseDO;
@@ -56,4 +57,10 @@ public class SysUserDO extends BaseDO {
      * 用户状态
      */
     private String status;
+
+    /**
+     * 是否预置数据
+     */
+    @TableField(value = "is_preset")
+    private Boolean preset;
 }

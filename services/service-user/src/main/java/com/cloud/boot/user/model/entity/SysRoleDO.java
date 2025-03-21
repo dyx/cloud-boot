@@ -1,5 +1,6 @@
 package com.cloud.boot.user.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.cloud.boot.common.mybatis.base.BaseDO;
 import lombok.Data;
@@ -22,4 +23,10 @@ public class SysRoleDO extends BaseDO {
      * 描述
      */
     private String description;
+
+    /**
+     * 是否预置数据
+     */
+    @TableField(value = "is_preset")
+    private Boolean preset;
 }

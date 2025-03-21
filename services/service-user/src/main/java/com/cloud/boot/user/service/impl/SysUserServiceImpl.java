@@ -139,6 +139,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO> im
 
     @Override
     public void removeUserById(Long id) {
+        SysUserDO dataObj = getById(id);
+        if (dataObj == null) {
+            return;
+        }
+        if (dataObj.getPreset()) {
+            throw new BizException("预置数据不可删除");
+        }
         removeById(id);
     }
 }
