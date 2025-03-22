@@ -58,6 +58,7 @@ public class SysUserDO {
 2.暂不支持层级嵌套实体
 
 ## @Translate 字段翻译注解
+很多时候我们需要关联另一张表查询数据，比如关联字典查询状态，关联用户查询用户名称等，可以使用该注解
 ### 使用
 1. 引入依赖
 ```xml
@@ -117,3 +118,7 @@ public class CustomTranslator implements Translator<String> {
 1. 翻译工具目前只支持 IPage（MybatisPlus）、List、单个实体的返回值
 2. 字典类型翻译，翻译值字段为`源字段+Name`，如源字段为`status`，则翻译值字段为`statusName`
 3. 字典类型只支持 1 对 1 翻译，其他类型支持 1 对多翻译，通过指定多个`@TranslateMapping`实现
+
+## 操作日志
+
+## 数据权限

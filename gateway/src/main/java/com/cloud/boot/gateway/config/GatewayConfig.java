@@ -28,7 +28,7 @@ public class GatewayConfig {
                 .addInclude("/**")
                 .addExclude("/webjars/**", "/v3/api-docs/**", "/doc.html", "/swagger-ui.html", "/swagger-ui/**", "/swagger-resources", "/favicon.ico")
                 .addExclude(ServiceConfig.SERVICES.stream().map(serviceInfo -> serviceInfo.contextPath() + "/v3/api-docs/**").toArray(String[]::new))
-                .addExclude("/auth/login")
+                .addExclude("/auth/login", "/auth/public-key")
                 .setAuth(obj -> SaRouter.match("/**", r -> StpUtil.checkLogin()))
                 .setBeforeAuth(obj -> {
                     SaHolder.getResponse()
