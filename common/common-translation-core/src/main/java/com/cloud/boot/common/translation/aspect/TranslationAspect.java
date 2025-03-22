@@ -33,7 +33,7 @@ public class TranslationAspect {
         Object result = joinPoint.proceed();
 
         if (result == null) {
-            return result;
+            return null;
         }
 
         if (result instanceof List<?> list) {

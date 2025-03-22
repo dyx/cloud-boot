@@ -53,6 +53,24 @@ create table sys_menu
 )
     comment '菜单权限';
 
+create table sys_operation_log
+(
+    id                   bigint auto_increment comment '主键ID'
+        primary key,
+    module               varchar(50) default '' not null comment '操作模块',
+    type                 varchar(20) default '' not null comment '操作类型（新增/修改/删除等）',
+    operator_id          bigint      default 0  not null comment '操作人ID',
+    operation_time       datetime               not null comment '操作时间',
+    operation_ip         varchar(50)            null comment '操作IP',
+    operation_user_agent varchar(256)           null,
+    method               varchar(200)           null comment '请求方法',
+    params               text                   null comment '请求参数',
+    result               text                   null comment '返回结果',
+    status               char        default '' null comment '操作状态（1成功 2失败）',
+    elapsed_time         bigint                 null comment '操作耗时（毫秒）',
+    error_msg            text                   null comment '错误信息'
+);
+
 create table sys_role
 (
     id          bigint auto_increment comment '主键ID'
@@ -64,7 +82,9 @@ create table sys_role
     update_by   bigint      default 0                 not null comment '修改人',
     update_time datetime                              null on update CURRENT_TIMESTAMP comment '修改时间',
     delete_time bigint      default 0                 not null comment '删除时间',
-    is_preset   tinyint     default 0                 not null comment '是否预置数据'
+    is_preset   tinyint     default 0                 not null comment '是否预置数据',
+    constraint uk_name
+        unique (name, delete_time)
 )
     comment '角色';
 
@@ -83,9 +103,9 @@ create table sys_user
         primary key,
     username    varchar(50)  default ''      not null comment '用户名',
     password    varchar(255) default ''      not null comment '用户密码',
-    name        varchar(32)  default ''      not null,
+    name        varchar(32)  default ''      not null comment '用户姓名',
     nickname    varchar(64)  default ''      not null comment '用户昵称',
-    avatar      varchar(255) default ''      not null,
+    avatar      varchar(255) default ''      not null comment '用户头像',
     email       varchar(100) default ''      not null comment '用户邮箱',
     phone       varchar(20)  default ''      not null comment '手机号',
     status      char         default '1'     null comment '用户状态 1启用 2停用',

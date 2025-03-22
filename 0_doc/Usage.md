@@ -119,6 +119,78 @@ public class CustomTranslator implements Translator<String> {
 2. 字典类型翻译，翻译值字段为`源字段+Name`，如源字段为`status`，则翻译值字段为`statusName`
 3. 字典类型只支持 1 对 1 翻译，其他类型支持 1 对多翻译，通过指定多个`@TranslateMapping`实现
 
-## 操作日志
+## @OperationLog 操作日志注解
+1. 引入依赖
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.cloud.boot</groupId>
+        <artifactId>common-log</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+```
+2. 在 Controller 方法上增加`@OperationLog`注解
+```java
+    @OperationLog(module = "角色管理", type = "新增")
+    @Operation(summary = "新增角色")
+    @PostMapping
+    public R<?> saveRole(@Valid @RequestBody SaveRoleDTO dto) {
+        sysRoleService.saveRole(dto);
+        return R.ok();
+    }
 
-## 数据权限
+    @OperationLog(module = "角色管理", type = "修改")
+    @Operation(summary = "修改角色")
+    @PutMapping("/{id}")
+    public R<?> updateRoleById(@PathVariable("id") Long id, @Valid @RequestBody SaveRoleDTO dto) {
+        sysRoleService.updateRoleById(id, dto);
+        return R.ok();
+    }
+
+    @OperationLog(module = "角色管理", type = "删除")
+    @Operation(summary = "删除角色")
+    @DeleteMapping("/{id}")
+    public R<?> removeRoleById(@PathVariable("id") Long id) {
+        sysRoleService.removeRoleById(id);
+        return R.ok();
+    }
+```
+
+## @SaCheckPermission 功能权限注解
+1. 引入依赖
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.cloud.boot</groupId>
+        <artifactId>common-resource-server</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+```
+2. 在 Controller 方法上增加`@SaCheckPermission`注解，命名方法`实体名:功能名`
+```java
+    @SaCheckPermission("user:save")
+    @Operation(summary = "创建用户")
+    @PostMapping
+    public R<?> saveUser(@Valid @RequestBody SaveUserDTO dto) {
+        // ...
+    }
+
+    @SaCheckPermission("user:update")
+    @Operation(summary = "修改用户")
+    @PutMapping("/{id}")
+    public R<?> updateUserById(@PathVariable("id") Long id, @Valid @RequestBody UpdateUserDTO dto) {
+        // ...
+    }
+
+    @SaCheckPermission("user:remove")
+    @Operation(summary = "删除用户")
+    @DeleteMapping("/{id}")
+    public R<?> removeUserById(@PathVariable("id") Long id) {
+        // ...
+    }
+```
+3. 在`sys_menu`插入数据，通过角色的`分配权限`功能，分配功能权限
+
+## 数据权限注解

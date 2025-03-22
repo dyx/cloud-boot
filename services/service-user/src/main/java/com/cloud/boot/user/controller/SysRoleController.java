@@ -3,9 +3,10 @@ package com.cloud.boot.user.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.cloud.boot.common.core.util.R;
-import com.cloud.boot.user.model.dto.SaveRoleDTO;
+import com.cloud.boot.common.log.annontaion.OperationLog;
 import com.cloud.boot.user.model.dto.RoleListQuery;
 import com.cloud.boot.user.model.dto.RolePageQuery;
+import com.cloud.boot.user.model.dto.SaveRoleDTO;
 import com.cloud.boot.user.model.vo.RoleDetailVO;
 import com.cloud.boot.user.model.vo.RoleListVO;
 import com.cloud.boot.user.service.SysRoleService;
@@ -46,14 +47,16 @@ public class SysRoleController {
         return R.ok(sysRoleService.getRoleById(id));
     }
 
+    @OperationLog(module = "角色管理", type = "新增")
     @SaCheckPermission("role:save")
-    @Operation(summary = "创建角色")
+    @Operation(summary = "新增角色")
     @PostMapping
     public R<?> saveRole(@Valid @RequestBody SaveRoleDTO dto) {
         sysRoleService.saveRole(dto);
         return R.ok();
     }
 
+    @OperationLog(module = "角色管理", type = "修改")
     @SaCheckPermission("role:update")
     @Operation(summary = "修改角色")
     @PutMapping("/{id}")
@@ -62,6 +65,7 @@ public class SysRoleController {
         return R.ok();
     }
 
+    @OperationLog(module = "角色管理", type = "删除")
     @SaCheckPermission("role:remove")
     @Operation(summary = "删除角色")
     @DeleteMapping("/{id}")

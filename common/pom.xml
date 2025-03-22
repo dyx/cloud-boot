@@ -19,6 +19,7 @@
         <module>common-config</module>
         <module>common-translation-annotation</module>
         <module>common-translation-core</module>
+        <module>common-log</module>
     </modules>
 
     <properties>

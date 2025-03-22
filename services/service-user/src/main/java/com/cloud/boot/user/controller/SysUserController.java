@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.cloud.boot.common.core.util.R;
 import com.cloud.boot.common.core.util.RHandler;
 import com.cloud.boot.common.feign.annotation.Inner;
+import com.cloud.boot.common.log.annontaion.OperationLog;
 import com.cloud.boot.order.feign.OrderFeignClient;
 import com.cloud.boot.order.model.dto.SaveOrderDTO;
 import com.cloud.boot.order.model.dto.SaveOrderItemDTO;
@@ -82,14 +83,16 @@ public class SysUserController {
         return R.ok(sysUserService.getUserById(id));
     }
 
+    @OperationLog(module = "用户管理", type = "新增")
     @SaCheckPermission("user:save")
-    @Operation(summary = "创建用户")
+    @Operation(summary = "新增用户")
     @PostMapping
     public R<?> saveUser(@Valid @RequestBody SaveUserDTO dto) {
         sysUserService.saveUser(dto);
         return R.ok();
     }
 
+    @OperationLog(module = "用户管理", type = "修改")
     @SaCheckPermission("user:update")
     @Operation(summary = "修改用户")
     @PutMapping("/{id}")
@@ -98,6 +101,7 @@ public class SysUserController {
         return R.ok();
     }
 
+    @OperationLog(module = "用户管理", type = "删除")
     @SaCheckPermission("user:remove")
     @Operation(summary = "删除用户")
     @DeleteMapping("/{id}")

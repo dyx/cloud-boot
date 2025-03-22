@@ -1,22 +1,17 @@
 package com.cloud.boot.user.model.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.cloud.boot.common.mybatis.base.BaseDO;
 import lombok.Data;
-
-import java.time.LocalDateTime;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author lhd
  */
+@EqualsAndHashCode(callSuper = true)
 @TableName("sys_menu")
 @Data
-public class SysMenuDO {
-
-    /**
-     * 主键ID
-     */
-    @TableId
-    private Long id;
+public class SysMenuDO extends BaseDO {
 
     /**
      * 父菜单ID
@@ -52,34 +47,4 @@ public class SysMenuDO {
      * 排序号
      */
     private Integer orderNum;
-
-    /**
-     * 创建人
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private Long createBy;
-
-    /**
-     * 创建时间
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    /**
-     * 修改人
-     */
-    @TableField(fill = FieldFill.UPDATE)
-    private Long updateBy;
-
-    /**
-     * 修改时间
-     */
-    @TableField(fill = FieldFill.UPDATE)
-    private LocalDateTime updateTime;
-
-    /**
-     * 删除时间
-     */
-    @TableLogic
-    private Long deleteTime;
 }

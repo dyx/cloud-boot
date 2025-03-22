@@ -1,6 +1,6 @@
 package com.cloud.boot.common.config;
 
-import com.cloud.boot.common.config.aop.HttpLogAop;
+import com.cloud.boot.common.config.aspect.HttpLogAspect;
 import com.cloud.boot.common.config.handler.GlobalExceptionHandler;
 import com.cloud.boot.common.config.sentinel.CustomBlockExceptionHandler;
 import org.springframework.context.annotation.Bean;
@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 public class ConfigAutoConfiguration {
     @Bean
-    public HttpLogAop httpLogAop() {
-        return new HttpLogAop();
+    public HttpLogAspect httpLogAop() {
+        return new HttpLogAspect();
     }
 
     @Bean

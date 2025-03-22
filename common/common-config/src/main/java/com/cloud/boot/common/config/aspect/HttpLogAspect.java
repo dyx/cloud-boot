@@ -1,4 +1,4 @@
-package com.cloud.boot.common.config.aop;
+package com.cloud.boot.common.config.aspect;
 
 import com.cloud.boot.common.core.jackson.JacksonUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 @Slf4j
 @Aspect
-public class HttpLogAop {
+public class HttpLogAspect {
 
     @Value("${custom.http.log.enable:true}")
     private Boolean enabled;
